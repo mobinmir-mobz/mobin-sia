@@ -10,7 +10,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
   <style>
     html,body{overscroll-behavior:none}
-
+ 
     :root {
       --color-primary-50: #f6f9ff;
       --color-primary-100: #e9e5ff;
@@ -57,7 +57,7 @@
       --shadow-offset:0;--shadow-blur:20px;--shadow-spread:-5px;--shadow-color:rgba(255,255,255,0.7);
       --outer-shadow-blur:24px;
     }
-
+ 
     .dark {
       --color-background-primary:#0a0d14;
       --color-background-secondary:#111821;
@@ -87,9 +87,9 @@
       --shadow-glass:0 8px 32px 0 rgba(0,0,0,0.37);
       --shadow-glow:0 0 20px rgba(139,92,246,0.3);
     }
-
+ 
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;border:0 solid var(--card-border)}
-
+ 
     html {
       font-family:'Open Sans',sans-serif;
       font-size:16px;line-height:1.5;
@@ -97,7 +97,7 @@
       scroll-behavior:smooth;
       scroll-padding-top:100px;
     }
-
+ 
     body {
       margin:0;padding:0;min-height:100vh;
       background:var(--bg-gradient);
@@ -106,10 +106,10 @@
       display:flex;flex-direction:column;
       overflow-x:visible;
     }
-
+ 
     h1,h2,h3,h4,h5,h6{font-family:'Lato',sans-serif;color:var(--text-primary);transition:color 0.3s ease}
     a{color:inherit;text-decoration:none}
-
+ 
     .content-wrapper {
       background-color:var(--card-bg);
       border-radius:1.5rem;
@@ -121,7 +121,15 @@
       min-height:800px;
       position:relative;
     }
-
+ 
+    /* ── HEADER CONTROLS (theme + lang together) ── */
+    .header-controls {
+      display:flex;
+      align-items:center;
+      gap:0.5rem;
+      z-index:51;
+    }
+ 
     /* THEME TOGGLE */
     .theme-toggle {
       background:var(--accent-light);
@@ -135,23 +143,44 @@
       z-index:51;
     }
     .theme-toggle:hover{transform:scale(1.1);background:var(--accent-medium)}
-
+ 
+    /* LANGUAGE TOGGLE */
+    .lang-toggle {
+      background:var(--accent-light);
+      color:var(--accent-primary);
+      border:none;border-radius:9999px;
+      width:3rem;height:3rem;
+      display:flex;align-items:center;justify-content:center;
+      cursor:pointer;
+      transition:all 0.3s ease;
+      box-shadow:var(--button-shadow);
+      font-size:0.75rem;
+      font-weight:700;
+      font-family:'Lato',sans-serif;
+      letter-spacing:0.03em;
+      z-index:51;
+    }
+    .lang-toggle:hover{transform:scale(1.1);background:var(--accent-medium)}
+ 
     @media (min-width:768px){
-      .theme-toggle.mobile-only{display:none!important}
-      .theme-toggle.desktop-only{
+      .header-controls.mobile-only{display:none!important}
+      .header-controls.desktop-only{
         position:absolute;top:2rem;right:3rem;
       }
-      .theme-toggle.desktop-only.sticky{
+      .header-controls.desktop-only.sticky{
         top:50%;transform:translateY(-50%);right:2rem;
       }
+      /* keep old selectors working for sticky js */
+      .theme-toggle.desktop-only{display:none!important}
+      .theme-toggle.mobile-only{display:none!important}
     }
     @media (max-width:767px){
-      .theme-toggle.desktop-only{display:none!important}
-      .theme-toggle.mobile-only{
+      .header-controls.desktop-only{display:none!important}
+      .header-controls.mobile-only{
         position:fixed;top:1rem;right:1rem;z-index:200;
       }
     }
-
+ 
     /* HEADER */
     @media (min-width:768px){
       header {
@@ -239,7 +268,7 @@
       .nav-link.active::after{width:80%;background:rgba(255,255,255,0.8)}
     }
     @media (max-width:767px){header{display:none!important}}
-
+ 
     /* CONTENT CONTAINER */
     .content-container{
       display:flex;flex-direction:column;padding:2rem;gap:2rem;position:relative;min-height:100vh;overflow:visible;
@@ -258,7 +287,7 @@
         opacity:0.7;box-shadow:0 0 8px 1px rgba(91,70,255,0.1);transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
       }
     }
-
+ 
     /* SIDEBAR */
     .sidebar{display:flex;flex-direction:column;align-items:center;gap:2rem;width:100%;z-index:10}
     .desktop-sidebar-content{display:none}
@@ -283,8 +312,8 @@
       .sidebar-name{font-size:1.5rem!important;font-weight:700!important;color:var(--text-primary)!important;margin:0!important}
       .sidebar-title{font-size:0.9rem!important;color:var(--text-secondary)!important;line-height:1.5!important;margin:0!important;text-align:center!important;max-width:250px!important}
     }
-
-    /* PROFILE PHOTO */
+ 
+    /* ── PROFILE PHOTO + MEMOJI HOVER ── */
     .profile-photo-container{
       width:160px;height:160px;margin:0 auto;border-radius:50%;position:relative;
     }
@@ -294,9 +323,10 @@
       transition:all 0.6s cubic-bezier(0.4,0,0.2,1);
     }
     .profile-photo-wrapper:hover{transform:translateY(-2px) rotateY(5deg) rotateX(-2deg)}
+ 
+    /* The static base image */
     .profile-photo{
       width:100%;height:100%;border-radius:50%;
-      /* PLACEHOLDER - Replace src below with your photo path */
       background:#d4cfc9 url('./mobin\ mmoji.png') no-repeat center 20%;
       background-size:110%;
       transform-style:preserve-3d;transition:all 0.6s cubic-bezier(0.4,0,0.2,1);
@@ -309,6 +339,22 @@
       background:linear-gradient(135deg,rgba(255,255,255,0.2) 0%,transparent 30%,transparent 70%,rgba(255,255,255,0.1) 100%);
       pointer-events:none;opacity:0.8;transition:opacity 0.6s ease;
     }
+ 
+    /* Memoji overlay – shown on mouse proximity */
+    .memoji-overlay {
+      position:absolute;
+      inset:0;
+      border-radius:50%;
+      background:#d4cfc9 url('./mobin\ mmoji.png') no-repeat center 20%;
+      background-size:110%;
+      opacity:0;
+      transition:opacity 0.35s ease, background-position 0.1s ease;
+      pointer-events:none;
+      z-index:6;
+      border-radius:50%;
+      overflow:hidden;
+    }
+ 
     .shine,.opposite-shine{
       position:absolute;inset:0;border-radius:50%;pointer-events:none;opacity:0;
       transition:all 0.5s cubic-bezier(0.4,0,0.2,1);
@@ -316,7 +362,7 @@
     .shine{background:radial-gradient(circle at 50% 50%,rgba(255,255,255,0.4) 0%,rgba(255,255,255,0.2) 30%,transparent 60%);z-index:3}
     .opposite-shine{background:radial-gradient(circle at 50% 50%,rgba(139,92,246,0.15) 0%,rgba(79,70,229,0.1) 40%,transparent 70%);z-index:2}
     .model-3d-canvas-wrap{position:absolute;inset:0;border-radius:50%;z-index:4;pointer-events:none;opacity:0}
-
+ 
     /* RESUME BUTTON */
     .resume-button{
       display:inline-block;background-color:var(--accent-light);color:var(--accent-primary);
@@ -324,12 +370,12 @@
       transition:all 0.3s ease;margin-top:1rem;
     }
     .resume-button:hover{background-color:var(--accent-medium);transform:translateY(-5px);box-shadow:0 15px 25px -5px rgba(0,0,0,0.1)}
-
+ 
     /* SOCIAL LINKS */
     .social-links{display:flex;gap:1.5rem;margin-top:1rem;justify-content:center}
     .social-link{font-size:1.25rem;color:var(--accent-primary);transition:transform 0.3s ease,color 0.3s ease}
     .social-link:hover{transform:scale(1.2);color:var(--accent-dark)}
-
+ 
     /* HERO CONTENT (mobile) */
     .hero-content{
       display:flex;flex-direction:column;align-items:center;text-align:center;gap:1rem;padding:1rem 0;
@@ -337,7 +383,7 @@
     .hero-title{font-size:1.75rem;font-weight:700;color:var(--text-primary);margin:0}
     .hero-subtitle{font-size:0.95rem;color:var(--text-secondary);margin:0;line-height:1.5}
     .hero-buttons{display:flex;flex-direction:column;align-items:center;gap:0.75rem}
-
+ 
     /* SECTIONS */
     .section{
       margin-bottom:2.5rem;padding:1.5rem;background:var(--card-bg);
@@ -352,7 +398,7 @@
       content:'';position:absolute;left:0;top:0;bottom:0;width:4px;
       background:var(--accent-primary);border-radius:2px;
     }
-
+ 
     /* ABOUT */
     .about-text{color:var(--text-secondary);line-height:1.7;transition:opacity 0.4s ease}
     .about-text p{margin-bottom:1.25rem}
@@ -378,25 +424,14 @@
     .philosophy-details .philosophy-content p{margin-bottom:1rem;color:var(--text-secondary);line-height:1.7}
     .philosophy-details .philosophy-content p:last-child{margin-bottom:0}
     .philosophy-details .philosophy-content strong{color:var(--text-primary)}
-
+ 
     /* PROJECTS */
     .projects-container{display:block;width:100%;position:relative}
-
-    /* Project placeholder colors */
     .ph-blue{background:linear-gradient(135deg,#667eea,#764ba2)}
     .ph-green{background:linear-gradient(135deg,#11998e,#38ef7d)}
     .ph-orange{background:linear-gradient(135deg,#f093fb,#f5576c)}
     .ph-teal{background:linear-gradient(135deg,#4facfe,#00f2fe)}
-    .ph-purple{background:linear-gradient(135deg,#43e97b,#38f9d7)}
-    .ph-red{background:linear-gradient(135deg,#fa709a,#fee140)}
-    .ph-indigo{background:linear-gradient(135deg,#a18cd1,#fbc2eb)}
-    .ph-dark{background:linear-gradient(135deg,#0f2027,#203a43,#2c5364)}
-    .ph-warm{background:linear-gradient(135deg,#f7971e,#ffd200)}
-    .ph-cool{background:linear-gradient(135deg,#373b44,#4286f4)}
-    .ph-pink{background:linear-gradient(135deg,#fc5c7d,#6a3093)}
-    .ph-lime{background:linear-gradient(135deg,#56ab2f,#a8e063)}
-    .ph-gray{background:linear-gradient(135deg,#bdc3c7,#2c3e50)}
-
+ 
     @media (min-width:768px){
       .projects-carousel-wrapper{position:relative;width:100%}
       .projects-track{position:relative;width:100%;min-height:660px;padding:0.5rem;margin:-0.5rem}
@@ -423,14 +458,13 @@
       .dark .carousel-indicator{background:rgba(255,255,255,0.4)}
       .dark .carousel-indicator.active{background:var(--accent-primary)}
     }
-
     @media (max-width:767px){
       .projects-carousel-wrapper{display:contents}
       .projects-track{display:contents}
       .carousel-slide{display:contents}
       .carousel-indicators-container{display:none!important}
     }
-
+ 
     /* PROJECT CARDS */
     .project-link{text-decoration:none;color:inherit}
     .project-card{
@@ -443,20 +477,16 @@
     }
     .project-card:hover{box-shadow:0 20px 40px rgba(0,0,0,0.2)}
     .project-card:hover .project-category{opacity:1;transform:translateY(0)}
-
-    /* Project image / placeholder */
     .project-image{
       position:absolute;top:0;left:0;width:100%;height:100%;
       object-fit:cover;z-index:1;
       transition:transform 0.5s cubic-bezier(0.23,1,0.32,1);
       border-radius:20px;will-change:transform;
     }
-    /* Placeholder div when no image */
     .project-image-placeholder{
       position:absolute;top:0;left:0;width:100%;height:100%;
       z-index:1;border-radius:20px;
     }
-
     .project-title-chip{
       position:relative;padding:0.75rem 1.5rem;border-radius:28px;isolation:isolate;
       box-shadow:0px 6px var(--outer-shadow-blur) rgba(0,0,0,0.2);
@@ -488,8 +518,6 @@
     }
     .project-content{display:none}
     .project-description{display:none}
-
-    /* Mobile project scroll */
     @media (max-width:767px){
       .projects-container{
         display:flex;overflow-x:auto;gap:1rem;
@@ -500,7 +528,7 @@
       .project-link{flex:0 0 260px;scroll-snap-align:start}
       .project-card{height:220px}
     }
-
+ 
     /* SKILLS */
     .skills-category{margin-bottom:2rem}
     .category-title{
@@ -524,7 +552,7 @@
     }
     .skill-badge:hover{background:var(--accent-primary);color:white;transform:translateY(-2px);box-shadow:0 4px 12px rgba(91,70,255,0.3);border:1px solid transparent}
     .dark .skill-badge{background:var(--accent-light);color:var(--accent-primary);border:1px solid var(--accent-medium)}
-
+ 
     /* EXPERIENCE */
     .experience-list{display:flex;flex-direction:column;gap:1.25rem}
     .experience-item{
@@ -543,61 +571,78 @@
     }
     .tech-tag:hover{background:rgba(91,70,255,0.15);border-color:rgba(91,70,255,0.3)}
     .dark .tech-tag{background:rgba(139,92,246,0.15);border-color:rgba(139,92,246,0.25);color:var(--accent-primary)}
-
+ 
     /* FOOTER */
     footer{
       background:var(--header-bg);padding:1.5rem;text-align:center;
       color:rgba(255,255,255,0.8);transition:background-color 0.3s ease;
       border-radius:0 0 1.5rem 1.5rem;
     }
+ 
+    /* ── LANGUAGE TRANSITION ── */
+    [data-en],[data-fr]{transition:opacity 0.2s ease}
   </style>
 </head>
 <body>
   <div class="content-wrapper">
-    <button aria-label="Toggle dark mode" class="theme-toggle mobile-only" id="theme-toggle-mobile"><i class="fas fa-moon"></i></button>
+ 
+    <!-- Mobile controls: theme + lang -->
+    <div class="header-controls mobile-only" id="controls-mobile">
+      <button aria-label="Toggle language" class="lang-toggle" id="lang-toggle-mobile">FR</button>
+      <button aria-label="Toggle dark mode" class="theme-toggle" id="theme-toggle-mobile"><i class="fas fa-moon"></i></button>
+    </div>
+ 
     <header>
-      <button aria-label="Toggle dark mode" class="theme-toggle desktop-only" id="theme-toggle-desktop"><i class="fas fa-moon"></i></button>
+      <!-- Desktop controls: theme + lang -->
+      <div class="header-controls desktop-only" id="controls-desktop">
+        <button aria-label="Toggle language" class="lang-toggle" id="lang-toggle-desktop">FR</button>
+        <button aria-label="Toggle dark mode" class="theme-toggle" id="theme-toggle-desktop"><i class="fas fa-moon"></i></button>
+      </div>
+ 
       <div class="header-content">
         <h1 id="nameHeader">MOBIN MIR</h1>
-        <p id="headerSubtitle"> Digital Marketing | SEO  &amp; WordPress Web Developer </p>
+        <p id="headerSubtitle">Digital Marketing | SEO &amp; WordPress Web Developer</p>
       </div>
       <nav class="sticky-nav">
-        <a class="nav-link" href="#about-section">About</a>
-        <a class="nav-link" href="#projects-section">Projects</a>
-        <a class="nav-link" href="#skills-section">Skills</a>
-        <a class="nav-link" href="#experiences-section">Experience</a>
+        <a class="nav-link" href="#about-section" data-en="About" data-fr="À propos">About</a>
+        <a class="nav-link" href="#projects-section" data-en="Projects" data-fr="Projets">Projects</a>
+        <a class="nav-link" href="#skills-section" data-en="Skills" data-fr="Compétences">Skills</a>
+        <a class="nav-link" href="#experiences-section" data-en="Experience" data-fr="Expérience">Experience</a>
       </nav>
     </header>
-
+ 
     <div class="content-container">
       <div class="sidebar-container">
         <aside class="sidebar" id="sidebar">
           <div class="profile-photo-container">
-            <div class="profile-photo-wrapper">
+            <div class="profile-photo-wrapper" id="profile-wrapper">
               <div class="model-3d-canvas-wrap"><canvas id="model-canvas"></canvas></div>
               <div class="profile-photo"></div>
+              <!-- Memoji overlay that reacts to mouse -->
+              <div class="memoji-overlay" id="memoji-overlay"></div>
               <div class="shine"></div>
               <div class="opposite-shine"></div>
             </div>
           </div>
+ 
           <!-- Mobile hero -->
           <div class="hero-content">
             <h1 class="hero-title">Mobin MIR</h1>
-            <p class="hero-subtitle">Digital Marketing | SEO  &amp; Web Developer WordPress </p>
+            <p class="hero-subtitle" data-en="Digital Marketing | SEO &amp; Web Developer WordPress" data-fr="Marketing Digital | SEO &amp; Développeur Web WordPress">Digital Marketing | SEO &amp; Web Developer WordPress</p>
             <div class="hero-buttons">
-              <a class="resume-button" href="pdfs/Resume.pdf" download>View Resume</a>
+              <a class="resume-button" href="Cv mobz .pdf" download data-en="View Resume" data-fr="Voir CV">View Resume</a>
               <div class="social-links">
                 <a class="social-link" href="https://www.linkedin.com/in/mobin-miro-4a8608222" target="_blank"><i class="fab fa-linkedin"></i></a>
-                
-                <a class="social-link" href="mobin.h@me.com"><i class="fas fa-envelope"></i></a>
+                <a class="social-link" href="mailto:mobin.h@me.com"><i class="fas fa-envelope"></i></a>
               </div>
             </div>
           </div>
+ 
           <!-- Desktop sidebar -->
           <div class="desktop-sidebar-content">
             <h2 class="sidebar-name">Mobin MIR</h2>
-            <p class="sidebar-title">SEO & Digital Marketing Specialist <br />  Web Developer,WordPress </p>
-            <a class="resume-button" href="pdfs/Resume.pdf" download>View Resume</a>
+            <p class="sidebar-title" data-en="SEO & Digital Marketing Specialist<br/>Web Developer, WordPress" data-fr="Spécialiste SEO & Marketing Digital<br/>Développeur Web, WordPress">SEO &amp; Digital Marketing Specialist <br/>Web Developer, WordPress</p>
+            <a class="resume-button" href="Cv mobz .pdf" download data-en="View Resume" data-fr="Voir CV">View Resume</a>
             <div class="social-links">
               <a class="social-link" href="https://www.linkedin.com/in/mobin-miro-4a8608222" target="_blank"><i class="fab fa-linkedin"></i></a>
               <a class="social-link" href="mailto:mobin.h@me.com"><i class="fas fa-envelope"></i></a>
@@ -605,267 +650,270 @@
           </div>
         </aside>
       </div>
-
+ 
       <main class="main-content" id="main-content">
-
+ 
         <!-- ABOUT -->
         <section class="section" id="about-section">
-          <h2 class="section-title" id="aboutMeHeader">About Me</h2>
+          <h2 class="section-title" data-en="About Me" data-fr="À propos de moi">About Me</h2>
           <div class="about-text" id="about-me">
-            <p>I’m Mobin, an SEO and Digital Marketing specialist focused on WordPress and web development.</p>
-            <p>I earned my Bachelor’s degree (Bac+3) from ISCOD, where I combined academic learning with hands-on experience in website management, SEO, and digital optimization..</p>
-            <p>I’m passionate about helping brands grow online by building websites that are both visually professional and optimized for strong search performance. My experience includes technical SEO, content optimization, website analytics, WordPress management, and improving user experience.I enjoy working on projects that create real impact — whether that’s increasing a website’s visibility on Google, improving site structure and performance, or solving technical and digital challenges. I approach problems with curiosity, adaptability, and a strong focus on finding effective long-term solutions, not just quick fixes.</p>
+            <p data-en="I'm Mobin, an SEO and Digital Marketing specialist focused on WordPress and web development." data-fr="Je suis Mobin, spécialiste SEO et Marketing Digital, axé sur WordPress et le développement web.">I'm Mobin, an SEO and Digital Marketing specialist focused on WordPress and web development.</p>
+            <p data-en="I earned my Bachelor's degree (Bac+3) from ISCOD, where I combined academic learning with hands-on experience in website management, SEO, and digital optimization." data-fr="J'ai obtenu mon Bachelor (Bac+3) à l'ISCOD, où j'ai combiné apprentissage académique et expérience pratique en gestion de sites web, SEO et optimisation digitale.">I earned my Bachelor's degree (Bac+3) from ISCOD, where I combined academic learning with hands-on experience in website management, SEO, and digital optimization.</p>
+            <p data-en="I'm passionate about helping brands grow online by building websites that are both visually professional and optimized for strong search performance. My experience includes technical SEO, content optimization, website analytics, WordPress management, and improving user experience. I enjoy working on projects that create real impact — whether that's increasing a website's visibility on Google, improving site structure and performance, or solving technical and digital challenges. I approach problems with curiosity, adaptability, and a strong focus on finding effective long-term solutions, not just quick fixes." data-fr="Je suis passionné par l'aide aux marques pour leur croissance en ligne, en construisant des sites web à la fois visuellement professionnels et optimisés pour les moteurs de recherche. Mon expérience inclut le SEO technique, l'optimisation de contenu, l'analyse web, la gestion WordPress et l'amélioration de l'expérience utilisateur. J'aime travailler sur des projets à fort impact — qu'il s'agisse d'améliorer la visibilité sur Google, d'optimiser la structure du site ou de résoudre des défis techniques et digitaux.">I'm passionate about helping brands grow online by building websites that are both visually professional and optimized for strong search performance. My experience includes technical SEO, content optimization, website analytics, WordPress management, and improving user experience. I enjoy working on projects that create real impact — whether that's increasing a website's visibility on Google, improving site structure and performance, or solving technical and digital challenges. I approach problems with curiosity, adaptability, and a strong focus on finding effective long-term solutions, not just quick fixes.</p>
             <details class="philosophy-details">
-              <summary>My Philosophy</summary>
+              <summary data-en="My Philosophy" data-fr="Ma Philosophie">My Philosophy</summary>
               <div class="philosophy-content">
-                <p><strong>I work across SEO, digital marketing.</strong> WordPress, and web development with a problem-solving mindset. Whether it’s improving a website’s visibility on Google, optimizing technical performance, managing content strategy, or enhancing user experience, I’m comfortable moving between technical and creative challenges. What matters most to me is building solutions that create real impact..</p>
-                <p><strong>I believe good digital </strong> work should be both effective and sustainable. I focus on understanding what users actually need, then make clear decisions around performance, structure, SEO, and usability. From clean website organization to optimized content and user-friendly interfaces, I value simplicity, clarity, and long-term efficiency.</p>
-                <p><strong>I’m also someone who enjoys digging into problems</strong> When something breaks or underperforms, I like analyzing the root cause, testing solutions methodically, and improving systems step by step. I work well with teams, communicate openly, and adapt quickly when priorities change or new challenges appear.</p>
-                <p><strong>Most importantly,.</strong> I'm rigorous about testing and evaluation, but I'm not dogmatic. The best insights come from teammates, users, and data. I stay curious, adjust based on what I'm learning, and get better at my craft continuously.</p>
+                <p data-en="<strong>I work across SEO, digital marketing,</strong> WordPress, and web development with a problem-solving mindset. Whether it's improving a website's visibility on Google, optimizing technical performance, managing content strategy, or enhancing user experience, I'm comfortable moving between technical and creative challenges. What matters most to me is building solutions that create real impact." data-fr="<strong>Je travaille dans le SEO, le marketing digital,</strong> WordPress et le développement web avec un esprit orienté solutions. Qu'il s'agisse d'améliorer la visibilité d'un site sur Google, d'optimiser les performances techniques ou d'améliorer l'expérience utilisateur, je suis à l'aise entre défis techniques et créatifs. Ce qui compte le plus pour moi, c'est de construire des solutions à fort impact."><strong>I work across SEO, digital marketing,</strong> WordPress, and web development with a problem-solving mindset. Whether it's improving a website's visibility on Google, optimizing technical performance, managing content strategy, or enhancing user experience, I'm comfortable moving between technical and creative challenges. What matters most to me is building solutions that create real impact.</p>
+                <p data-en="<strong>I believe good digital</strong> work should be both effective and sustainable. I focus on understanding what users actually need, then make clear decisions around performance, structure, SEO, and usability. From clean website organization to optimized content and user-friendly interfaces, I value simplicity, clarity, and long-term efficiency." data-fr="<strong>Je crois que le bon travail digital</strong> doit être à la fois efficace et durable. Je me concentre sur la compréhension des besoins réels des utilisateurs, puis je prends des décisions claires en matière de performance, de structure, de SEO et d'utilisabilité. De l'organisation du site au contenu optimisé, je valorise la simplicité, la clarté et l'efficacité à long terme."><strong>I believe good digital</strong> work should be both effective and sustainable. I focus on understanding what users actually need, then make clear decisions around performance, structure, SEO, and usability. From clean website organization to optimized content and user-friendly interfaces, I value simplicity, clarity, and long-term efficiency.</p>
+                <p data-en="<strong>I'm also someone who enjoys digging into problems.</strong> When something breaks or underperforms, I like analyzing the root cause, testing solutions methodically, and improving systems step by step. I work well with teams, communicate openly, and adapt quickly when priorities change or new challenges appear." data-fr="<strong>J'apprécie également de creuser les problèmes.</strong> Quand quelque chose ne fonctionne pas, j'aime analyser la cause racine, tester des solutions méthodiquement et améliorer les systèmes étape par étape. Je travaille bien en équipe, je communique ouvertement et je m'adapte rapidement quand les priorités changent."><strong>I'm also someone who enjoys digging into problems.</strong> When something breaks or underperforms, I like analyzing the root cause, testing solutions methodically, and improving systems step by step. I work well with teams, communicate openly, and adapt quickly when priorities change or new challenges appear.</p>
+                <p data-en="<strong>Most importantly,</strong> I'm rigorous about testing and evaluation, but I'm not dogmatic. The best insights come from teammates, users, and data. I stay curious, adjust based on what I'm learning, and get better at my craft continuously." data-fr="<strong>Avant tout,</strong> je suis rigoureux dans les tests et l'évaluation, sans être dogmatique. Les meilleures idées viennent des coéquipiers, des utilisateurs et des données. Je reste curieux, je m'ajuste en fonction de ce que j'apprends, et je m'améliore continuellement."><strong>Most importantly,</strong> I'm rigorous about testing and evaluation, but I'm not dogmatic. The best insights come from teammates, users, and data. I stay curious, adjust based on what I'm learning, and get better at my craft continuously.</p>
               </div>
             </details>
           </div>
         </section>
-
+ 
         <!-- PROJECTS -->
         <section class="section" id="projects-section">
-          <h2 class="section-title" id="projectsHeader">Projects</h2>
+          <h2 class="section-title" data-en="Projects" data-fr="Projets">Projects</h2>
           <div class="projects-container" id="projects-container">
             <div class="projects-carousel-wrapper">
               <div class="projects-track" id="projects-track">
-
-                <!-- Slide 1 -->
-                                <div class="carousel-slide active">
-                                    
-                    <a class="project-link" href="src/ai-recommender-system.html">
-                        <div class="project-card">
-                        <div class="project-category">SEO</div>
-
-                        <img src="/1.png"
-                            alt="WordPress Website Design"
-                            class="project-image">
-
-                        <div class="project-title-chip">
-                            <h3>SEO Optimization Projects</h3>
-                        </div>
-                        </div>
-                    </a>
-                                    <a class="project-link" href="https://chalky-app.com" target="_blank">
+                <div class="carousel-slide active">
+                  <a class="project-link" href="src/ai-recommender-system.html">
                     <div class="project-card">
-                        <div class="project-category">WORDPRESS</div>
-
-                        <img src="./s.png"
-                            alt="WordPress Website Design"
-                            class="project-image">
-
-                        <div class="project-title-chip">
-                        <h3>WordPress Website Design</h3>
-                        </div>
+                      <div class="project-category">SEO</div>
+                      <img src="/1.png" alt="WordPress Website Design" class="project-image">
+                      <div class="project-title-chip"><h3 data-en="SEO Optimization Projects" data-fr="Projets d'Optimisation SEO">SEO Optimization Projects</h3></div>
                     </div>
-                    </a>
-                                <a class="project-link" href="http://kfswire.com/" target="_blank">
-                <div class="project-card">
-                    <div class="project-category">WORDPRESS</div>
-
-                    <img src="./Slide 1.png"
-                        alt="WordPress Website Design"
-                        class="project-image">
-
-                    <div class="project-title-chip">
-                    <h3>WordPress Website Design</h3>
+                  </a>
+                  <a class="project-link" href="https://chalky-app.com" target="_blank">
+                    <div class="project-card">
+                      <div class="project-category">WORDPRESS</div>
+                      <img src="./s.png" alt="WordPress Website Design" class="project-image">
+                      <div class="project-title-chip"><h3 data-en="WordPress Website Design" data-fr="Design Site WordPress">WordPress Website Design</h3></div>
                     </div>
+                  </a>
+                  <a class="project-link" href="http://kfswire.com/" target="_blank">
+                    <div class="project-card">
+                      <div class="project-category">WORDPRESS</div>
+                      <img src="./Slide 1.png" alt="WordPress Website Design" class="project-image">
+                      <div class="project-title-chip"><h3 data-en="WordPress Website Design" data-fr="Design Site WordPress">WordPress Website Design</h3></div>
+                    </div>
+                  </a>
+                  <a class="project-link" href="src/clustering-visualization.html">
+                    <div class="project-card">
+                      <div class="project-category">LOGO</div>
+                      <img src="./kfs-logo-1080x1350.jpg" alt="Logo Design" class="project-image">
+                      <div class="project-title-chip"><h3 data-en="Logo Design" data-fr="Design de Logo">Logo Design</h3></div>
+                    </div>
+                  </a>
+                  <a class="project-link" href="src/tts-refiner.html">
+                    <div class="project-card">
+                      <div class="project-category">INSTAGRAM</div>
+                      <img src="./ins.png" alt="Digital Marketing" class="project-image">
+                      <div class="project-title-chip"><h3 data-en="Digital Marketing" data-fr="Marketing Digital">Digital Marketing</h3></div>
+                    </div>
+                  </a>
+                  <a class="project-link" href="src/gan-study.html">
+                    <div class="project-card">
+                      <div class="project-category">Adobe</div>
+                      <img src="./apple.png" alt="Photoshop" class="project-image">
+                      <div class="project-title-chip"><h3 data-en="Photoshop" data-fr="Photoshop">Photoshop</h3></div>
+                    </div>
+                  </a>
                 </div>
-                </a>
-                  </a>
-                    <a class="project-link" href="src/clustering-visualization.html">
-                    <div class="project-card">
-                        <div class="project-category">LOGO</div>
-
-                        <img src="./kfs-logo-1080x1350.jpg"
-                            alt="Logo Design"
-                            class="project-image">
-
-                        <div class="project-title-chip">
-                        <h3>Logo Design</h3>
-                        </div>
-                    </div>
-                  </a>
-                    <a class="project-link" href="src/tts-refiner.html">
-                    <div class="project-card">
-                        <div class="project-category">INSTAGRAM</div>
-
-                        <img src="./ins.png"
-                            alt="Digital Marketing"
-                            class="project-image">
-
-                        <div class="project-title-chip">
-                        <h3>Digital Marketing</h3>
-                        </div>
-                    </div>
-                    </a>
-                  
-<a class="project-link" href="src/gan-study.html">
-  <div class="project-card">
-    <div class="project-category">Adobe</div>
-
-    <img src="./apple.png"
-         alt="Photoshop"
-         class="project-image">
-
-    <div class="project-title-chip">
-      <h3>Photoshop</h3>
-      </div>
-</a>
-    </div>
- 
-        </section>
-
-        <!-- SKILLS -->
-        <section class="section" id="skills-section">
-          <h2 class="section-title" id="skillsHeader">Skills &amp; Expertise </h2>
-          <div class="skills-category">
-            <h3 class="category-title">SEO</h3>
-            <div class="skills-container">
-              <div class="skill-badge">Technical SEO</div>
-              <div class="skill-badge">On-Page SEO</div>
-              <div class="skill-badge">Keyword Research</div>
-              <div class="skill-badge">Google Search Console</div>
-              <div class="skill-badge">SEO Strategy</div>
-              <div class="skill-badge">Internal Linking</div>
-              <div class="skill-badge">Performance Optimization</div>
-              <div class="skill-badge">Indexing & Crawlability</div>
-            </div>
-          </div>
-          <div class="skills-category">
-            <h3 class="category-title">Web Development</h3>
-            <div class="skills-container">
-              <div class="skill-badge">WordPress</div>
-              <div class="skill-badge"> HTML</div>
-              <div class="skill-badge">CSS</div>
-              <div class="skill-badge">JavaScript</div>
-              <div class="skill-badge">Elementor</div>
-              <div class="skill-badge">Responsive Design</div>
-            </div>
-          </div>
-          <div class="skills-category">
-            <h3 class="category-title">Digital Marketing</h3>
-            <div class="skills-container">
-              <div class="skill-badge">Content Strategy</div>
-              <div class="skill-badge">Social Media</div>
-              <div class="skill-badge">Campaign Optimization</div>
-              <div class="skill-badge">Email Marketing</div>
-            </div>
-          </div>
-          <div class="skills-category">
-            <h3 class="category-title">Performance &amp; Analytics </h3>
-            <div class="skills-container">
-              <div class="skill-badge">Google Analytics </div>
-              <div class="skill-badge">Website Performance</div>
-              <div class="skill-badge">User Experience</div>
-              <div class="skill-badge">Conversion Optimization</div>
+              </div>
+              <div class="carousel-indicators-container">
+                <div class="carousel-indicators" id="carousel-indicators"></div>
+                <span class="carousel-counter" id="carousel-counter"></span>
               </div>
             </div>
           </div>
         </section>
-
+ 
+        <!-- SKILLS -->
+        <section class="section" id="skills-section">
+          <h2 class="section-title" data-en="Skills &amp; Expertise" data-fr="Compétences &amp; Expertise">Skills &amp; Expertise</h2>
+          <div class="skills-category">
+            <h3 class="category-title" data-en="SEO" data-fr="SEO">SEO</h3>
+            <div class="skills-container">
+              <div class="skill-badge" data-en="Technical SEO" data-fr="SEO Technique">Technical SEO</div>
+              <div class="skill-badge" data-en="On-Page SEO" data-fr="SEO On-Page">On-Page SEO</div>
+              <div class="skill-badge" data-en="Keyword Research" data-fr="Recherche de Mots-clés">Keyword Research</div>
+              <div class="skill-badge" data-en="Google Search Console" data-fr="Google Search Console">Google Search Console</div>
+              <div class="skill-badge" data-en="SEO Strategy" data-fr="Stratégie SEO">SEO Strategy</div>
+              <div class="skill-badge" data-en="Internal Linking" data-fr="Maillage Interne">Internal Linking</div>
+              <div class="skill-badge" data-en="Performance Optimization" data-fr="Optimisation des Performances">Performance Optimization</div>
+              <div class="skill-badge" data-en="Indexing &amp; Crawlability" data-fr="Indexation &amp; Crawlabilité">Indexing &amp; Crawlability</div>
+            </div>
+          </div>
+          <div class="skills-category">
+            <h3 class="category-title" data-en="Web Development" data-fr="Développement Web">Web Development</h3>
+            <div class="skills-container">
+              <div class="skill-badge">WordPress</div>
+              <div class="skill-badge">HTML</div>
+              <div class="skill-badge">CSS</div>
+              <div class="skill-badge">JavaScript</div>
+              <div class="skill-badge">Elementor</div>
+              <div class="skill-badge" data-en="Responsive Design" data-fr="Design Responsive">Responsive Design</div>
+            </div>
+          </div>
+          <div class="skills-category">
+            <h3 class="category-title" data-en="Digital Marketing" data-fr="Marketing Digital">Digital Marketing</h3>
+            <div class="skills-container">
+              <div class="skill-badge" data-en="Content Strategy" data-fr="Stratégie de Contenu">Content Strategy</div>
+              <div class="skill-badge" data-en="Social Media" data-fr="Réseaux Sociaux">Social Media</div>
+              <div class="skill-badge" data-en="Campaign Optimization" data-fr="Optimisation de Campagnes">Campaign Optimization</div>
+              <div class="skill-badge" data-en="Email Marketing" data-fr="Email Marketing">Email Marketing</div>
+            </div>
+          </div>
+          <div class="skills-category">
+            <h3 class="category-title" data-en="Performance &amp; Analytics" data-fr="Performance &amp; Analytique">Performance &amp; Analytics</h3>
+            <div class="skills-container">
+              <div class="skill-badge">Google Analytics</div>
+              <div class="skill-badge" data-en="Website Performance" data-fr="Performance du Site">Website Performance</div>
+              <div class="skill-badge" data-en="User Experience" data-fr="Expérience Utilisateur">User Experience</div>
+              <div class="skill-badge" data-en="Conversion Optimization" data-fr="Optimisation des Conversions">Conversion Optimization</div>
+            </div>
+          </div>
+        </section>
+ 
         <!-- EXPERIENCE -->
         <section class="section" id="experiences-section">
-          <h2 class="section-title" id="experiencesHeader">Experience</h2>
+          <h2 class="section-title" data-en="Experience" data-fr="Expérience">Experience</h2>
           <div class="experience-list">
             <div class="experience-item">
-              <h3 class="experience-title">SEO &amp; Digital Marketing </h3>
-              <p class="experience-company">Digital & Co | Paris, France | Sep 2025 – Present</p>
-              <p class="experience-description">Contributed to the launch and online growth of the company’s new website, created to replace the previous Digital and Cie platform. Focused on SEO optimization, search visibility, website performance, and digital growth strategies.</p>
-              <p class="experience-description">● Worked on technical SEO and on-page optimization to improve search engine visibility.<br>●Monitored website performance and indexing through Google Search Console and Google Analytics.<br>● Helped improve the overall SEO performance of the new website after its launch.<br>● Participated in digital marketing and online branding strategies.</p>
+              <h3 class="experience-title" data-en="SEO &amp; Digital Marketing" data-fr="SEO &amp; Marketing Digital">SEO &amp; Digital Marketing</h3>
+              <p class="experience-company">Digital &amp; Co | Paris, France | Sep 2025 – Present</p>
+              <p class="experience-description" data-en="Contributed to the launch and online growth of the company's new website, created to replace the previous Digital and Cie platform. Focused on SEO optimization, search visibility, website performance, and digital growth strategies." data-fr="Contribué au lancement et à la croissance en ligne du nouveau site de l'entreprise. Axé sur l'optimisation SEO, la visibilité dans les moteurs de recherche, les performances du site web et les stratégies de croissance digitale.">Contributed to the launch and online growth of the company's new website, created to replace the previous Digital and Cie platform. Focused on SEO optimization, search visibility, website performance, and digital growth strategies.</p>
+              <p class="experience-description" data-en="● Worked on technical SEO and on-page optimization to improve search engine visibility.<br>● Monitored website performance and indexing through Google Search Console and Google Analytics.<br>● Helped improve the overall SEO performance of the new website after its launch.<br>● Participated in digital marketing and online branding strategies." data-fr="● Travaillé sur le SEO technique et l'optimisation on-page pour améliorer la visibilité dans les moteurs de recherche.<br>● Suivi des performances et de l'indexation via Google Search Console et Google Analytics.<br>● Contribué à l'amélioration globale du SEO du nouveau site après son lancement.<br>● Participé aux stratégies de marketing digital et de branding en ligne.">● Worked on technical SEO and on-page optimization to improve search engine visibility.<br>● Monitored website performance and indexing through Google Search Console and Google Analytics.<br>● Helped improve the overall SEO performance of the new website after its launch.<br>● Participated in digital marketing and online branding strategies.</p>
               <div class="experience-tech">
                 <span class="tech-tag">Search Console</span><span class="tech-tag">Keyword Research</span><span class="tech-tag">Technical SEO</span>
               </div>
             </div>
             <div class="experience-item">
-              <h3 class="experience-title">Freelance SEO Consultant</h3>
-              <p class="experience-company"></p>Izacoil | Dubai, UAE | Jan 2025 – Aug 2025</p>
-              <p class="experience-description">Worked on SEO consulting and digital visibility strategies to improve website performance and online presence. Focused on search optimization, technical SEO recommendations, and website analysis for better search engine visibility and user reach.</p>
-              <p class="experience-description">●Conducted SEO audits and website performance analysis.<br>● Worked on keyword research and on-page SEO improvements.<br>●Analyzed website structure, indexing, and search visibility performance.<br>● Contributed to digital growth and online branding strategies.</p>
+              <h3 class="experience-title" data-en="Freelance SEO Consultant" data-fr="Consultant SEO Freelance">Freelance SEO Consultant</h3>
+              <p class="experience-company">Izacoil | Dubai, UAE | Jan 2025 – Aug 2025</p>
+              <p class="experience-description" data-en="Worked on SEO consulting and digital visibility strategies to improve website performance and online presence. Focused on search optimization, technical SEO recommendations, and website analysis for better search engine visibility and user reach." data-fr="Travaillé sur le consulting SEO et les stratégies de visibilité digitale pour améliorer les performances des sites web. Axé sur l'optimisation des recherches, les recommandations SEO techniques et l'analyse des sites web.">Worked on SEO consulting and digital visibility strategies to improve website performance and online presence. Focused on search optimization, technical SEO recommendations, and website analysis for better search engine visibility and user reach.</p>
+              <p class="experience-description" data-en="● Conducted SEO audits and website performance analysis.<br>● Worked on keyword research and on-page SEO improvements.<br>● Analyzed website structure, indexing, and search visibility performance.<br>● Contributed to digital growth and online branding strategies." data-fr="● Réalisé des audits SEO et des analyses de performances de sites web.<br>● Travaillé sur la recherche de mots-clés et les améliorations SEO on-page.<br>● Analysé la structure des sites, l'indexation et les performances de visibilité.<br>● Contribué aux stratégies de croissance digitale et de branding en ligne.">● Conducted SEO audits and website performance analysis.<br>● Worked on keyword research and on-page SEO improvements.<br>● Analyzed website structure, indexing, and search visibility performance.<br>● Contributed to digital growth and online branding strategies.</p>
               <div class="experience-tech">
                 <span class="tech-tag">Technical SEO</span><span class="tech-tag">Keyword Research</span><span class="tech-tag">Search Visibility</span><span class="tech-tag">Digital Strategy</span>
               </div>
             </div>
             <div class="experience-item">
-              <h3 class="experience-title">Designer graphique freelance</h3>
+              <h3 class="experience-title" data-en="Freelance Graphic Designer" data-fr="Designer Graphique Freelance">Freelance Graphic Designer</h3>
               <p class="experience-company">Freelance | Jan 2024 – Dec 2024</p>
-              <p class="experience-description">Worked on graphic design and visual content creation using Adobe Photoshop for companies and digital brands. Focused on creating professional and impactful visuals for marketing, branding, and online communication across different digital platforms.</p>
-              <p class="experience-description">● Designed promotional visuals, banners, and marketing content for companies.<br>●Worked on visual identity, content presentation, and creative layouts</p>
-              <p class="experience-description">
+              <p class="experience-description" data-en="Worked on graphic design and visual content creation using Adobe Photoshop for companies and digital brands. Focused on creating professional and impactful visuals for marketing, branding, and online communication across different digital platforms." data-fr="Travaillé sur le design graphique et la création de contenu visuel avec Adobe Photoshop pour des entreprises et des marques digitales. Axé sur la création de visuels professionnels pour le marketing, le branding et la communication en ligne.">Worked on graphic design and visual content creation using Adobe Photoshop for companies and digital brands. Focused on creating professional and impactful visuals for marketing, branding, and online communication across different digital platforms.</p>
+              <p class="experience-description" data-en="● Designed promotional visuals, banners, and marketing content for companies.<br>● Worked on visual identity, content presentation, and creative layouts." data-fr="● Conçu des visuels promotionnels, des bannières et du contenu marketing pour des entreprises.<br>● Travaillé sur l'identité visuelle, la présentation de contenu et les mises en page créatives.">● Designed promotional visuals, banners, and marketing content for companies.<br>● Worked on visual identity, content presentation, and creative layouts.</p>
               <div class="experience-tech">
-                <span class="tech-tag">photoshop</span><span class="tech-tag">Graphic Design</span><span class="tech-tag">Social Media Design</span>
+                <span class="tech-tag">Photoshop</span><span class="tech-tag">Graphic Design</span><span class="tech-tag">Social Media Design</span>
               </div>
             </div>
           </div>
         </section>
       </main>
     </div>
-
+ 
     <footer><p>2026 MOBIN MIR</p></footer>
   </div>
-
+ 
   <script>
-  // ── DARK MODE ──
+  // ══════════════════════════════════════════
+  //  DARK MODE
+  // ══════════════════════════════════════════
   const root = document.documentElement;
   const saved = localStorage.getItem('theme');
   if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     root.classList.add('dark');
   }
-  function toggleTheme() {
-    const isDark = root.classList.toggle('dark');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  function syncThemeIcons() {
+    const isDark = root.classList.contains('dark');
     document.querySelectorAll('.theme-toggle').forEach(btn => {
       btn.querySelector('i').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
     });
   }
-  if (root.classList.contains('dark')) {
-    document.querySelectorAll('.theme-toggle').forEach(btn => {
-      btn.querySelector('i').className = 'fas fa-sun';
-    });
+  function toggleTheme() {
+    const isDark = root.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    syncThemeIcons();
   }
+  syncThemeIcons();
   document.getElementById('theme-toggle-mobile').addEventListener('click', toggleTheme);
   document.getElementById('theme-toggle-desktop').addEventListener('click', toggleTheme);
-
-  // ── STICKY HEADER ──
+ 
+  // ══════════════════════════════════════════
+  //  LANGUAGE TOGGLE (EN / FR)
+  // ══════════════════════════════════════════
+  let currentLang = localStorage.getItem('lang') || 'en';
+ 
+  function applyLang(lang) {
+    currentLang = lang;
+    localStorage.setItem('lang', lang);
+ 
+    // Update every element with data-en / data-fr
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const text = el.getAttribute('data-' + lang);
+      if (text !== null) {
+        // Use innerHTML so <br> and <strong> work inside descriptions
+        el.innerHTML = text;
+      }
+    });
+ 
+    // Update button labels to show the OTHER language
+    const nextLang = lang === 'en' ? 'FR' : 'EN';
+    document.querySelectorAll('.lang-toggle').forEach(btn => {
+      btn.textContent = nextLang;
+    });
+ 
+    // Update html lang attribute
+    document.documentElement.lang = lang;
+  }
+ 
+  function toggleLang() {
+    applyLang(currentLang === 'en' ? 'fr' : 'en');
+  }
+ 
+  document.getElementById('lang-toggle-mobile').addEventListener('click', toggleLang);
+  document.getElementById('lang-toggle-desktop').addEventListener('click', toggleLang);
+ 
+  // Apply saved language on load
+  applyLang(currentLang);
+ 
+  // ══════════════════════════════════════════
+  //  STICKY HEADER
+  // ══════════════════════════════════════════
   const header = document.querySelector('header');
-  const themeDesktop = document.querySelector('.theme-toggle.desktop-only');
+  const controlsDesktop = document.getElementById('controls-desktop');
   if (header) {
-    let lastScrollY = window.scrollY;
     let ticking = false;
-    let stickyThreshold = 80;
-    let nonStickyThreshold = 60;
     let isSticky = false;
-
+ 
     function updateHeader() {
       const scrollY = window.scrollY;
-      if (!isSticky && scrollY > stickyThreshold) {
+      if (!isSticky && scrollY > 80) {
         isSticky = true;
         header.classList.add('sticky');
-        if (themeDesktop) themeDesktop.classList.add('sticky');
-      } else if (isSticky && scrollY < nonStickyThreshold) {
+        if (controlsDesktop) controlsDesktop.classList.add('sticky');
+      } else if (isSticky && scrollY < 60) {
         isSticky = false;
         header.classList.remove('sticky');
-        if (themeDesktop) themeDesktop.classList.remove('sticky');
+        if (controlsDesktop) controlsDesktop.classList.remove('sticky');
       }
-      // Update sidebar top based on sticky state
       const sidebarContainer = document.querySelector('.sidebar-container');
       if (sidebarContainer) {
-        sidebarContainer.style.setProperty('--sidebar-top', isSticky ? '90px' : '20px');
         sidebarContainer.style.top = isSticky ? '90px' : '20px';
       }
       ticking = false;
     }
-
+ 
     window.addEventListener('scroll', () => {
       if (!ticking) { requestAnimationFrame(updateHeader); ticking = true; }
     }, { passive: true });
   }
-
-  // ── NAV ACTIVE STATE ──
+ 
+  // ══════════════════════════════════════════
+  //  NAV ACTIVE STATE
+  // ══════════════════════════════════════════
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-link');
   const observer = new IntersectionObserver(entries => {
@@ -878,18 +926,20 @@
     });
   }, { threshold: 0.3 });
   sections.forEach(s => observer.observe(s));
-
-  // ── CAROUSEL (desktop) ──
+ 
+  // ══════════════════════════════════════════
+  //  CAROUSEL (desktop)
+  // ══════════════════════════════════════════
   function initCarousel() {
     if (window.innerWidth < 768) return;
     const slides = document.querySelectorAll('.carousel-slide');
     const indicatorsContainer = document.getElementById('carousel-indicators');
     const counter = document.getElementById('carousel-counter');
     if (!slides.length || !indicatorsContainer) return;
-
+ 
     let current = 0;
     indicatorsContainer.innerHTML = '';
-
+ 
     slides.forEach((_, i) => {
       const btn = document.createElement('button');
       btn.className = 'carousel-indicator' + (i === 0 ? ' active' : '');
@@ -897,11 +947,10 @@
       btn.addEventListener('click', () => goTo(i));
       indicatorsContainer.appendChild(btn);
     });
-
+ 
     function updateCounter() {
       if (counter) counter.textContent = (current + 1) + ' / ' + slides.length;
     }
-
     function goTo(idx) {
       slides[current].classList.remove('active');
       document.querySelectorAll('.carousel-indicator')[current].classList.remove('active');
@@ -910,16 +959,13 @@
       document.querySelectorAll('.carousel-indicator')[current].classList.add('active');
       updateCounter();
     }
-
     updateCounter();
-
-    // Keyboard navigation
+ 
     document.addEventListener('keydown', e => {
       if (e.key === 'ArrowRight') goTo((current + 1) % slides.length);
       if (e.key === 'ArrowLeft') goTo((current - 1 + slides.length) % slides.length);
     });
-
-    // Touch swipe on carousel
+ 
     const track = document.getElementById('projects-track');
     let startX = 0;
     track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
@@ -931,11 +977,12 @@
       }
     }, { passive: true });
   }
-
   initCarousel();
   window.addEventListener('resize', initCarousel);
-
-  // ── 3D CARD TILT ──
+ 
+  // ══════════════════════════════════════════
+  //  3D CARD TILT
+  // ══════════════════════════════════════════
   document.querySelectorAll('.project-card').forEach(card => {
     card.addEventListener('mousemove', e => {
       const rect = card.getBoundingClientRect();
@@ -959,8 +1006,10 @@
       if (chip) chip.style.transform = '';
     });
   });
-
-  // ── PROFILE PHOTO SHINE ──
+ 
+  // ══════════════════════════════════════════
+  //  PROFILE PHOTO SHINE
+  // ══════════════════════════════════════════
   const wrapper = document.querySelector('.profile-photo-wrapper');
   const shine = document.querySelector('.shine');
   const oppShine = document.querySelector('.opposite-shine');
@@ -984,6 +1033,80 @@
       }
     });
   }
+ 
+  // ══════════════════════════════════════════
+  //  MEMOJI MOUSE TRACKING
+  //  The memoji image shifts its background-position
+  //  based on where the cursor is on the page,
+  //  giving the illusion the character follows the mouse.
+  // ══════════════════════════════════════════
+  (function() {
+    const memojiOverlay = document.getElementById('memoji-overlay');
+    const profileWrapper = document.getElementById('profile-wrapper');
+    if (!memojiOverlay || !profileWrapper) return;
+ 
+    // How many frames of your memoji spritesheet you have.
+    // If you only have one static image (same as the base),
+    // we simulate "looking" by shifting the background position.
+    // Replace './mobin mmoji.png' with your actual memoji image path.
+    const MEMOJI_IMG = './mobin\\ mmoji.png'; // same as base photo
+ 
+    // Max px the image can shift in each direction (eye-tracking effect)
+    const MAX_SHIFT = 12; // pixels
+ 
+    let active = false;
+    let targetX = 0, targetY = 0;
+    let currentX = 0, currentY = 0;
+    let raf = null;
+ 
+    function lerp(a, b, t) { return a + (b - a) * t; }
+ 
+    function animate() {
+      currentX = lerp(currentX, targetX, 0.08);
+      currentY = lerp(currentY, targetY, 0.08);
+ 
+      // base position: center 20% (matches the static photo)
+      const posX = 50 + currentX;
+      const posY = 20 + currentY;
+      memojiOverlay.style.backgroundPosition = `${posX}% ${posY}%`;
+ 
+      raf = requestAnimationFrame(animate);
+    }
+ 
+    document.addEventListener('mousemove', e => {
+      const rect = profileWrapper.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+ 
+      // Normalise mouse position relative to the photo center
+      // clamp to [-1, 1]
+      const nx = Math.max(-1, Math.min(1, (e.clientX - centerX) / (window.innerWidth / 2)));
+      const ny = Math.max(-1, Math.min(1, (e.clientY - centerY) / (window.innerHeight / 2)));
+ 
+      targetX = nx * MAX_SHIFT;
+      targetY = ny * MAX_SHIFT;
+ 
+      // Fade in the overlay based on distance from photo
+      const dist = Math.sqrt(
+        Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2)
+      );
+      const maxDist = Math.min(window.innerWidth, window.innerHeight) * 0.6;
+      const fadeOpacity = Math.max(0, Math.min(1, 1 - dist / maxDist));
+      memojiOverlay.style.opacity = fadeOpacity;
+ 
+      if (!active) {
+        active = true;
+        animate();
+      }
+    });
+ 
+    document.addEventListener('mouseleave', () => {
+      memojiOverlay.style.opacity = 0;
+      targetX = 0;
+      targetY = 0;
+    });
+  })();
   </script>
 </body>
-</html> 
+</html>
+ 
