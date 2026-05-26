@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Mobin MIR — Digital Marketing | SEO</title>
+  <title>Mobin MIR — Digital Marketing | SEO</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
   <style>
-    html,body{overscroll-behavior:none}
+    html, body { overscroll-behavior: none; }
  
     :root {
       --color-primary-50: #f6f9ff;
@@ -52,9 +52,9 @@
       --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
       --shadow-glass: 0 8px 32px 0 rgba(31,38,135,0.37);
       --shadow-glow: 0 0 20px rgba(91,70,255,0.3);
-      --radius-sm:0.5rem;--radius-md:0.75rem;--radius-lg:1rem;--radius-xl:1.25rem;--radius-2xl:1.5rem;--radius-full:9999px;
-      --tint-color:255,255,255;--tint-opacity:0.4;--frost-blur:2px;
-      --shadow-offset:0;--shadow-blur:20px;--shadow-spread:-5px;--shadow-color:rgba(255,255,255,0.7);
+      --radius-sm:0.5rem; --radius-md:0.75rem; --radius-lg:1rem; --radius-xl:1.25rem; --radius-2xl:1.5rem; --radius-full:9999px;
+      --tint-color:255,255,255; --tint-opacity:0.4; --frost-blur:2px;
+      --shadow-offset:0; --shadow-blur:20px; --shadow-spread:-5px; --shadow-color:rgba(255,255,255,0.7);
       --outer-shadow-blur:24px;
     }
  
@@ -88,106 +88,174 @@
       --shadow-glow:0 0 20px rgba(139,92,246,0.3);
     }
  
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;border:0 solid var(--card-border)}
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; border:0 solid var(--card-border); }
  
     html {
       font-family:'Open Sans',sans-serif;
-      font-size:16px;line-height:1.5;
+      font-size:16px; line-height:1.5;
       -webkit-text-size-adjust:100%;
       scroll-behavior:smooth;
       scroll-padding-top:100px;
     }
  
     body {
-      margin:0;padding:0;min-height:100vh;
+      margin:0; padding:0; min-height:100vh;
       background:var(--bg-gradient);
       color:var(--text-primary);
       transition:background 0.3s ease,color 0.3s ease;
-      display:flex;flex-direction:column;
-      overflow-x:visible;
+      display:flex; flex-direction:column;
+      overflow-x:hidden;
     }
  
-    h1,h2,h3,h4,h5,h6{font-family:'Lato',sans-serif;color:var(--text-primary);transition:color 0.3s ease}
-    a{color:inherit;text-decoration:none}
+    h1,h2,h3,h4,h5,h6 { font-family:'Lato',sans-serif; color:var(--text-primary); transition:color 0.3s ease; }
+    a { color:inherit; text-decoration:none; }
  
+    /* ═══════════════════════════════════════
+       CONTENT WRAPPER
+    ═══════════════════════════════════════ */
     .content-wrapper {
       background-color:var(--card-bg);
       border-radius:1.5rem;
       box-shadow:var(--card-shadow);
       overflow:visible;
-      margin:2rem auto;
+      margin:1rem auto;
       transition:background-color 0.3s ease,box-shadow 0.3s ease;
       max-width:1280px;
       min-height:800px;
       position:relative;
+      width:100%;
     }
  
-    /* ── HEADER CONTROLS (theme + lang together) ── */
-    .header-controls {
-      display:flex;
-      align-items:center;
-      gap:0.5rem;
-      z-index:51;
+    @media (max-width:767px) {
+      .content-wrapper {
+        border-radius:0.75rem;
+        margin:0.5rem;
+        width:calc(100% - 1rem);
+        min-height:unset;
+      }
     }
  
-    /* THEME TOGGLE */
-    .theme-toggle {
+    /* ═══════════════════════════════════════
+       MOBILE HEADER (NEW — replaces desktop header on mobile)
+    ═══════════════════════════════════════ */
+    .mobile-header {
+      display:none;
+    }
+ 
+    @media (max-width:767px) {
+      .mobile-header {
+        display:block;
+        background:linear-gradient(135deg,rgba(82,60,248,0.92),rgba(96,44,199,0.88));
+        backdrop-filter:blur(16px) saturate(200%);
+        -webkit-backdrop-filter:blur(16px) saturate(200%);
+        border-radius:0.75rem 0.75rem 0 0;
+        padding:1.25rem 1rem 1.5rem;
+        position:relative;
+        overflow:hidden;
+      }
+      .mobile-header::before {
+        content:'';
+        position:absolute;top:0;left:0;right:0;height:2px;
+        background:linear-gradient(90deg,transparent,rgba(255,255,255,0.8),transparent);
+      }
+      .mobile-header-top {
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        margin-bottom:1.25rem;
+      }
+      .mobile-header-name {
+        color:#fff;
+        font-size:1.5rem;
+        font-weight:700;
+        letter-spacing:-0.02em;
+        line-height:1.1;
+      }
+      .mobile-header-controls {
+        display:flex;
+        align-items:center;
+        gap:0.5rem;
+      }
+      .mobile-header-subtitle {
+        color:rgba(255,255,255,0.88);
+        font-size:0.85rem;
+        font-weight:400;
+        line-height:1.5;
+        margin-bottom:1.25rem;
+      }
+      .mobile-header-nav {
+        display:flex;
+        gap:0.5rem;
+        flex-wrap:wrap;
+      }
+      .mobile-nav-link {
+        color:rgba(255,255,255,0.85);
+        font-size:0.78rem;
+        font-weight:500;
+        padding:0.4rem 0.9rem;
+        border-radius:9999px;
+        background:rgba(255,255,255,0.12);
+        backdrop-filter:blur(8px);
+        border:1px solid rgba(255,255,255,0.2);
+        transition:all 0.2s ease;
+        letter-spacing:0.02em;
+      }
+      .mobile-nav-link:active {
+        background:rgba(255,255,255,0.25);
+        color:#fff;
+      }
+    }
+ 
+    /* ═══════════════════════════════════════
+       HEADER CONTROLS (theme + lang)
+    ═══════════════════════════════════════ */
+    .theme-toggle, .lang-toggle {
       background:var(--accent-light);
       color:var(--accent-primary);
-      border:none;border-radius:9999px;
-      width:3rem;height:3rem;
-      display:flex;align-items:center;justify-content:center;
+      border:none; border-radius:9999px;
+      width:2.6rem; height:2.6rem;
+      display:flex; align-items:center; justify-content:center;
       cursor:pointer;
       transition:all 0.3s ease;
       box-shadow:var(--button-shadow);
-      z-index:51;
-    }
-    .theme-toggle:hover{transform:scale(1.1);background:var(--accent-medium)}
- 
-    /* LANGUAGE TOGGLE */
-    .lang-toggle {
-      background:var(--accent-light);
-      color:var(--accent-primary);
-      border:none;border-radius:9999px;
-      width:3rem;height:3rem;
-      display:flex;align-items:center;justify-content:center;
-      cursor:pointer;
-      transition:all 0.3s ease;
-      box-shadow:var(--button-shadow);
-      font-size:0.75rem;
-      font-weight:700;
+      font-size:0.75rem; font-weight:700;
       font-family:'Lato',sans-serif;
       letter-spacing:0.03em;
-      z-index:51;
+      flex-shrink:0;
     }
-    .lang-toggle:hover{transform:scale(1.1);background:var(--accent-medium)}
- 
-    @media (min-width:768px){
-      .header-controls.mobile-only{display:none!important}
-      .header-controls.desktop-only{
-        position:absolute;top:2rem;right:3rem;
-      }
-      .header-controls.desktop-only.sticky{
-        top:50%;transform:translateY(-50%);right:2rem;
-      }
-      /* keep old selectors working for sticky js */
-      .theme-toggle.desktop-only{display:none!important}
-      .theme-toggle.mobile-only{display:none!important}
-    }
-    @media (max-width:767px){
-      .header-controls.desktop-only{display:none!important}
-      .header-controls.mobile-only{
-        position:fixed;top:1rem;right:1rem;z-index:200;
-      }
+    .theme-toggle:hover, .lang-toggle:hover {
+      transform:scale(1.1); background:var(--accent-medium);
     }
  
-    /* HEADER */
-    @media (min-width:768px){
+    /* Mobile controls — inside mobile header now (no fixed positioning) */
+    .header-controls.mobile-only {
+      display:flex; align-items:center; gap:0.5rem;
+    }
+ 
+    /* Desktop controls */
+    @media (min-width:768px) {
+      .header-controls.mobile-only { display:none !important; }
+      .header-controls.desktop-only {
+        position:absolute; top:2rem; right:3rem;
+        display:flex; align-items:center; gap:0.5rem; z-index:51;
+      }
+      .header-controls.desktop-only.sticky {
+        top:50%; transform:translateY(-50%); right:2rem;
+      }
+    }
+    @media (max-width:767px) {
+      .header-controls.desktop-only { display:none !important; }
+    }
+ 
+    /* ═══════════════════════════════════════
+       DESKTOP HEADER
+    ═══════════════════════════════════════ */
+    @media (min-width:768px) {
       header {
         background:linear-gradient(135deg,rgba(82,60,248,0.85),rgba(96,44,199,0.8));
         backdrop-filter:blur(16px) saturate(220%);
         -webkit-backdrop-filter:blur(16px) saturate(220%);
-        padding:2rem;position:relative;overflow:hidden;
+        padding:2rem; position:relative; overflow:hidden;
         height:170px;
         transition:height 0.3s cubic-bezier(0.4,0,0.2,1),padding 0.3s cubic-bezier(0.4,0,0.2,1),background 0.3s ease,border-radius 0.3s ease,box-shadow 0.3s ease;
         box-shadow:0 8px 32px rgba(0,0,0,0.1),inset 0 2px 4px rgba(255,255,255,0.6),inset 0 -2px 4px rgba(0,0,0,0.1),inset 2px 0 4px rgba(255,255,255,0.3),inset -2px 0 4px rgba(0,0,0,0.1),0 4px 16px rgba(82,60,248,0.2);
@@ -196,409 +264,534 @@
         border-top:2px solid rgba(255,255,255,0.5);
         border-left:1px solid rgba(255,255,255,0.4);
         border-right:1px solid rgba(0,0,0,0.1);
-        width:100%;max-width:1280px;box-sizing:border-box;margin:0 auto;
-        display:flex;align-items:flex-end;justify-content:flex-start;
-        padding-left:3rem;padding-bottom:.75rem;
+        width:100%; max-width:1280px; box-sizing:border-box; margin:0 auto;
+        display:flex; align-items:flex-end; justify-content:flex-start;
+        padding-left:3rem; padding-bottom:.75rem;
       }
       header.sticky {
-        position:fixed;top:0;left:50%;transform:translateX(-50%);
-        width:100%;max-width:1280px;
-        padding:1.25rem 2rem;height:72px;
+        position:fixed; top:0; left:50%; transform:translateX(-50%);
+        width:100%; max-width:1280px;
+        padding:1.25rem 2rem; height:72px;
         background:linear-gradient(135deg,rgba(82,60,248,0.9),rgba(96,44,199,0.85));
         backdrop-filter:blur(20px) saturate(220%);
         -webkit-backdrop-filter:blur(20px) saturate(220%);
-        z-index:50;border-radius:0;
+        z-index:50; border-radius:0;
         border:1px solid rgba(255,255,255,0.25);
         border-top:2px solid rgba(255,255,255,0.4);
         box-shadow:0 4px 32px rgba(0,0,0,0.15),inset 0 2px 3px rgba(255,255,255,0.5),0 2px 16px rgba(82,60,248,0.25);
-        align-items:center;justify-content:space-between;flex-direction:row;
+        align-items:center; justify-content:space-between; flex-direction:row;
       }
       header::before {
-        content:'';position:absolute;top:0;left:0;right:0;height:3px;
+        content:''; position:absolute; top:0; left:0; right:0; height:3px;
         background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.9) 25%,rgba(255,255,255,0.6) 50%,rgba(255,255,255,0.9) 75%,transparent 100%);
-        border-radius:1.5rem 1.5rem 0 0;filter:blur(0.5px);pointer-events:none;
+        border-radius:1.5rem 1.5rem 0 0; filter:blur(0.5px); pointer-events:none;
       }
-      .dark header{
+      .dark header {
         background:linear-gradient(135deg,rgba(30,27,75,0.85),rgba(55,48,163,0.8));
-        border:1px solid rgba(255,255,255,0.15);border-top:2px solid rgba(255,255,255,0.3);
+        border:1px solid rgba(255,255,255,0.15); border-top:2px solid rgba(255,255,255,0.3);
       }
-      .dark header.sticky{
+      .dark header.sticky {
         background:linear-gradient(135deg,rgba(30,27,75,0.9),rgba(55,48,163,0.85));
-        height:72px;padding:1.25rem 2rem;
+        height:72px; padding:1.25rem 2rem;
       }
-      header h1{
-        color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.15);
-        font-size:2.75rem;font-weight:600;margin:0;letter-spacing:-0.025em;line-height:1.1;white-space:nowrap;
+      header h1 {
+        color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.15);
+        font-size:2.75rem; font-weight:600; margin:0; letter-spacing:-0.025em; line-height:1.1; white-space:nowrap;
         transition:font-size 0.3s cubic-bezier(0.4,0,0.2,1),font-weight 0.3s cubic-bezier(0.4,0,0.2,1);
       }
-      header.sticky h1{font-size:1.375rem;font-weight:500;letter-spacing:-0.01em;margin:0;flex-shrink:0}
-      header p{
-        color:rgba(255,255,255,0.92);margin:0;font-size:1.125rem;font-weight:400;line-height:1.4;
-        max-width:520px;display:block;white-space:normal;overflow:visible;text-align:left;
+      header.sticky h1 { font-size:1.375rem; font-weight:500; letter-spacing:-0.01em; margin:0; flex-shrink:0; }
+      header p {
+        color:rgba(255,255,255,0.92); margin:0; font-size:1.125rem; font-weight:400; line-height:1.4;
+        max-width:520px; display:block; white-space:normal; overflow:visible; text-align:left;
         transition:font-size 0.3s cubic-bezier(0.4,0,0.2,1),opacity 0.3s cubic-bezier(0.4,0,0.2,1);
       }
-      header.sticky p{font-size:0.875rem;font-weight:600;opacity:0.95;white-space:nowrap;max-width:none;margin:0}
-      .header-content{
-        display:flex;flex-direction:column;align-items:flex-start;text-align:left;
-        width:100%;max-width:1000px;gap:0.75rem;position:relative;
+      header.sticky p { font-size:0.875rem; font-weight:600; opacity:0.95; white-space:nowrap; max-width:none; margin:0; }
+      .header-content {
+        display:flex; flex-direction:column; align-items:flex-start; text-align:left;
+        width:100%; max-width:1000px; gap:0.75rem; position:relative;
         transition:gap 0.3s cubic-bezier(0.4,0,0.2,1),flex-direction 0.3s cubic-bezier(0.4,0,0.2,1);
       }
-      header.sticky .header-content{
-        flex-direction:row;align-items:baseline;gap:1.5rem;
-        padding-left:0;justify-content:flex-start;max-width:none;flex:0 0 auto;
+      header.sticky .header-content {
+        flex-direction:row; align-items:baseline; gap:1.5rem;
+        padding-left:0; justify-content:flex-start; max-width:none; flex:0 0 auto;
       }
-      .sticky-nav{
-        display:none;align-items:center;justify-content:center;gap:2rem;
+      .sticky-nav {
+        display:none; align-items:center; justify-content:center; gap:2rem;
         position:absolute;
-        left:62.5%;top:50%;transform:translate(-50%,-50%);
+        left:62.5%; top:50%; transform:translate(-50%,-50%);
       }
-      header.sticky .sticky-nav{display:flex}
-      .nav-link{
-        color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.875rem;font-weight:400;
-        padding:0.5rem 0.75rem;border-radius:6px;background:transparent;border:none;
-        transition:all 0.2s ease;white-space:nowrap;position:relative;letter-spacing:0.025em;
+      header.sticky .sticky-nav { display:flex; }
+      .nav-link {
+        color:rgba(255,255,255,0.8); text-decoration:none; font-size:0.875rem; font-weight:400;
+        padding:0.5rem 0.75rem; border-radius:6px; background:transparent; border:none;
+        transition:all 0.2s ease; white-space:nowrap; position:relative; letter-spacing:0.025em;
       }
-      .nav-link::after{
-        content:'';position:absolute;bottom:0;left:50%;width:0;height:1px;
-        background:rgba(255,255,255,0.6);transition:all 0.2s ease;transform:translateX(-50%);
+      .nav-link::after {
+        content:''; position:absolute; bottom:0; left:50%; width:0; height:1px;
+        background:rgba(255,255,255,0.6); transition:all 0.2s ease; transform:translateX(-50%);
       }
-      .nav-link:hover{color:rgba(255,255,255,1);background:rgba(255,255,255,0.08)}
-      .nav-link:hover::after{width:80%}
-      .nav-link.active{color:#fff;background:rgba(255,255,255,0.12)}
-      .nav-link.active::after{width:80%;background:rgba(255,255,255,0.8)}
+      .nav-link:hover { color:rgba(255,255,255,1); background:rgba(255,255,255,0.08); }
+      .nav-link:hover::after { width:80%; }
+      .nav-link.active { color:#fff; background:rgba(255,255,255,0.12); }
+      .nav-link.active::after { width:80%; background:rgba(255,255,255,0.8); }
     }
-    @media (max-width:767px){header{display:none!important}}
+    @media (max-width:767px) { header { display:none !important; } }
  
-    /* CONTENT CONTAINER */
-    .content-container{
-      display:flex;flex-direction:column;padding:2rem;gap:2rem;position:relative;min-height:100vh;overflow:visible;
+    /* ═══════════════════════════════════════
+       CONTENT CONTAINER
+    ═══════════════════════════════════════ */
+    .content-container {
+      display:flex;
+      flex-direction:column;
+      padding:1rem;
+      gap:1rem;
+      position:relative;
+      overflow:visible;
     }
-    @media (min-width:768px){
-      .content-container{flex-direction:row;min-height:calc(100vh - 160px);align-items:flex-start}
-      .sidebar-container{
-        width:25%;position:sticky;top:20px;height:fit-content;
-        align-self:flex-start;max-height:calc(100vh - 40px);overflow:visible;
-        overscroll-behavior:contain;transition:top 0.01s cubic-bezier(0.4,0,0.2,1);
+ 
+    @media (min-width:768px) {
+      .content-container {
+        flex-direction:row;
+        padding:2rem;
+        gap:2rem;
+        min-height:calc(100vh - 160px);
+        align-items:flex-start;
       }
-      .main-content{width:75%;padding-left:2rem;min-height:200vh;position:relative}
-      .main-content::before{
-        content:'';position:absolute;top:10%;left:0;height:80%;width:1px;
+      .sidebar-container {
+        width:25%;
+        position:sticky;
+        top:20px;
+        height:fit-content;
+        align-self:flex-start;
+        max-height:calc(100vh - 40px);
+        overflow:visible;
+        overscroll-behavior:contain;
+        transition:top 0.01s cubic-bezier(0.4,0,0.2,1);
+      }
+      .main-content {
+        width:75%;
+        padding-left:2rem;
+        min-height:200vh;
+        position:relative;
+      }
+      .main-content::before {
+        content:''; position:absolute; top:10%; left:0; height:80%; width:1px;
         background:linear-gradient(to bottom,transparent,var(--accent-light) 20%,var(--accent-primary) 50%,var(--accent-light) 80%,transparent);
-        opacity:0.7;box-shadow:0 0 8px 1px rgba(91,70,255,0.1);transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+        opacity:0.7; box-shadow:0 0 8px 1px rgba(91,70,255,0.1); transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
       }
     }
  
-    /* SIDEBAR */
-    .sidebar{display:flex;flex-direction:column;align-items:center;gap:2rem;width:100%;z-index:10}
-    .desktop-sidebar-content{display:none}
-    @media (min-width:768px){
-      .sidebar{min-height:auto!important;padding:0!important;background:transparent!important;overflow:visible!important;justify-content:flex-start!important}
-      .sidebar::before{display:none!important}
-      .hero-content{display:none!important}
-      .profile-photo-container{width:205px!important;height:205px!important;margin:0 auto 0.6rem!important}
-      .resume-button{
-        display:inline-block!important;background-color:var(--accent-light)!important;
-        color:var(--accent-primary)!important;font-weight:600!important;
-        padding:0.75rem 2rem!important;border-radius:9999px!important;
-        box-shadow:var(--button-shadow)!important;transition:all 0.3s ease!important;
-        margin-top:1rem!important;font-size:1rem!important;text-decoration:none!important;
-        border:none!important;background:var(--accent-light)!important;
-      }
-      .resume-button:hover{background-color:var(--accent-medium)!important;transform:translateY(-5px)!important}
-      .social-links{display:flex!important;gap:1.5rem!important;margin-top:1rem!important;justify-content:center!important}
-      .social-link{font-size:1.25rem!important;color:var(--accent-primary)!important;transition:transform 0.3s ease,color 0.3s ease!important}
-      .social-link:hover{transform:scale(1.2)!important;color:var(--accent-dark)!important}
-      .desktop-sidebar-content{display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important;gap:1rem!important}
-      .sidebar-name{font-size:1.5rem!important;font-weight:700!important;color:var(--text-primary)!important;margin:0!important}
-      .sidebar-title{font-size:0.9rem!important;color:var(--text-secondary)!important;line-height:1.5!important;margin:0!important;text-align:center!important;max-width:250px!important}
+    /* ═══════════════════════════════════════
+       SIDEBAR
+    ═══════════════════════════════════════ */
+    .sidebar {
+      display:flex; flex-direction:column; align-items:center; gap:1.5rem; width:100%; z-index:10;
     }
  
-    /* ── PROFILE PHOTO + MEMOJI HOVER ── */
-    .profile-photo-container{
-      width:160px;height:160px;margin:0 auto;border-radius:50%;position:relative;
+    /* Mobile sidebar = profile photo card */
+    @media (max-width:767px) {
+      .sidebar-container {
+        width:100%;
+      }
+      .sidebar {
+        background:var(--card-bg);
+        border-radius:16px;
+        box-shadow:var(--card-shadow);
+        border:1px solid var(--card-border);
+        padding:1.5rem 1rem;
+      }
+      .desktop-sidebar-content { display:none !important; }
     }
-    .profile-photo-wrapper{
-      position:relative;width:100%;height:100%;perspective:1000px;
-      border-radius:50%;overflow:visible;transform-style:preserve-3d;
+ 
+    @media (min-width:768px) {
+      .sidebar {
+        min-height:auto !important; padding:0 !important; background:transparent !important;
+        overflow:visible !important; justify-content:flex-start !important;
+      }
+      .sidebar::before { display:none !important; }
+      .hero-content { display:none !important; }
+      .profile-photo-container { width:205px !important; height:205px !important; margin:0 auto 0.6rem !important; }
+      .resume-button {
+        display:inline-block !important; background-color:var(--accent-light) !important;
+        color:var(--accent-primary) !important; font-weight:600 !important;
+        padding:0.75rem 2rem !important; border-radius:9999px !important;
+        box-shadow:var(--button-shadow) !important; transition:all 0.3s ease !important;
+        margin-top:1rem !important; font-size:1rem !important; text-decoration:none !important;
+        border:none !important; background:var(--accent-light) !important;
+      }
+      .resume-button:hover { background-color:var(--accent-medium) !important; transform:translateY(-5px) !important; }
+      .social-links { display:flex !important; gap:1.5rem !important; margin-top:1rem !important; justify-content:center !important; }
+      .social-link { font-size:1.25rem !important; color:var(--accent-primary) !important; transition:transform 0.3s ease,color 0.3s ease !important; }
+      .social-link:hover { transform:scale(1.2) !important; color:var(--accent-dark) !important; }
+      .desktop-sidebar-content { display:flex !important; flex-direction:column !important; align-items:center !important; text-align:center !important; gap:1rem !important; }
+      .sidebar-name { font-size:1.5rem !important; font-weight:700 !important; color:var(--text-primary) !important; margin:0 !important; }
+      .sidebar-title { font-size:0.9rem !important; color:var(--text-secondary) !important; line-height:1.5 !important; margin:0 !important; text-align:center !important; max-width:250px !important; }
+    }
+ 
+    /* ═══════════════════════════════════════
+       PROFILE PHOTO
+    ═══════════════════════════════════════ */
+    .profile-photo-container {
+      width:130px; height:130px; margin:0 auto; border-radius:50%; position:relative;
+    }
+ 
+    @media (max-width:767px) {
+      .profile-photo-container {
+        width:110px; height:110px;
+      }
+    }
+ 
+    .profile-photo-wrapper {
+      position:relative; width:100%; height:100%; perspective:1000px;
+      border-radius:50%; overflow:visible; transform-style:preserve-3d;
       transition:all 0.6s cubic-bezier(0.4,0,0.2,1);
     }
-    .profile-photo-wrapper:hover{transform:translateY(-2px) rotateY(5deg) rotateX(-2deg)}
- 
-    /* The static base image */
-    .profile-photo{
-      width:100%;height:100%;border-radius:50%;
+    .profile-photo-wrapper:hover { transform:translateY(-2px) rotateY(5deg) rotateX(-2deg); }
+    .profile-photo {
+      width:100%; height:100%; border-radius:50%;
       background:#d4cfc9 url('./mobin\ mmoji.png') no-repeat center 20%;
       background-size:110%;
-      transform-style:preserve-3d;transition:all 0.6s cubic-bezier(0.4,0,0.2,1);
-      position:relative;overflow:hidden;
+      transform-style:preserve-3d; transition:all 0.6s cubic-bezier(0.4,0,0.2,1);
+      position:relative; overflow:hidden;
       box-shadow:0 8px 32px rgba(0,0,0,0.12),0 2px 8px rgba(0,0,0,0.08),inset 0 1px 0 rgba(255,255,255,0.15);
       border:2px solid rgba(255,255,255,0.1);
     }
-    .profile-photo::before{
-      content:'';position:absolute;inset:0;border-radius:50%;
+    .profile-photo::before {
+      content:''; position:absolute; inset:0; border-radius:50%;
       background:linear-gradient(135deg,rgba(255,255,255,0.2) 0%,transparent 30%,transparent 70%,rgba(255,255,255,0.1) 100%);
-      pointer-events:none;opacity:0.8;transition:opacity 0.6s ease;
+      pointer-events:none; opacity:0.8; transition:opacity 0.6s ease;
     }
- 
-    /* Memoji overlay – shown on mouse proximity */
     .memoji-overlay {
-      position:absolute;
-      inset:0;
-      border-radius:50%;
+      position:absolute; inset:0; border-radius:50%;
       background:#d4cfc9 url('./mobin\ mmoji.png') no-repeat center 20%;
       background-size:110%;
-      opacity:0;
-      transition:opacity 0.35s ease, background-position 0.1s ease;
-      pointer-events:none;
-      z-index:6;
-      border-radius:50%;
+      opacity:0; transition:opacity 0.35s ease,background-position 0.1s ease;
+      pointer-events:none; z-index:6; overflow:hidden;
+    }
+    .shine, .opposite-shine {
+      position:absolute; inset:0; border-radius:50%; pointer-events:none; opacity:0;
+      transition:all 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .shine { background:radial-gradient(circle at 50% 50%,rgba(255,255,255,0.4) 0%,rgba(255,255,255,0.2) 30%,transparent 60%); z-index:3; }
+    .opposite-shine { background:radial-gradient(circle at 50% 50%,rgba(139,92,246,0.15) 0%,rgba(79,70,229,0.1) 40%,transparent 70%); z-index:2; }
+    .model-3d-canvas-wrap { position:absolute; inset:0; border-radius:50%; z-index:4; pointer-events:none; opacity:0; }
+ 
+    /* ═══════════════════════════════════════
+       HERO (mobile — inside sidebar card)
+    ═══════════════════════════════════════ */
+    .hero-content {
+      display:flex; flex-direction:column; align-items:center; text-align:center; gap:0.75rem; width:100%;
+    }
+    .hero-title { font-size:1.5rem; font-weight:700; color:var(--text-primary); margin:0; }
+    .hero-subtitle { font-size:0.875rem; color:var(--text-secondary); margin:0; line-height:1.5; }
+    .hero-buttons { display:flex; flex-direction:column; align-items:center; gap:0.75rem; width:100%; }
+ 
+    /* Resume button */
+    .resume-button {
+      display:inline-block; background-color:var(--accent-light); color:var(--accent-primary);
+      font-weight:600; padding:0.65rem 1.75rem; border-radius:9999px; box-shadow:var(--button-shadow);
+      transition:all 0.3s ease; margin-top:0.5rem; font-size:0.9rem; text-align:center;
+    }
+    .resume-button:hover { background-color:var(--accent-medium); transform:translateY(-3px); }
+ 
+    /* Social links */
+    .social-links { display:flex; gap:1.25rem; margin-top:0.5rem; justify-content:center; }
+    .social-link { font-size:1.25rem; color:var(--accent-primary); transition:transform 0.3s ease,color 0.3s ease; }
+    .social-link:hover { transform:scale(1.2); color:var(--accent-dark); }
+ 
+    /* ═══════════════════════════════════════
+       SECTIONS
+    ═══════════════════════════════════════ */
+    .section {
+      margin-bottom:1.25rem;
+      padding:1.25rem;
+      background:var(--card-bg);
+      border-radius:16px;
+      box-shadow:var(--card-shadow);
+      border:1px solid var(--card-border);
+      position:relative;
       overflow:hidden;
     }
  
-    .shine,.opposite-shine{
-      position:absolute;inset:0;border-radius:50%;pointer-events:none;opacity:0;
-      transition:all 0.5s cubic-bezier(0.4,0,0.2,1);
-    }
-    .shine{background:radial-gradient(circle at 50% 50%,rgba(255,255,255,0.4) 0%,rgba(255,255,255,0.2) 30%,transparent 60%);z-index:3}
-    .opposite-shine{background:radial-gradient(circle at 50% 50%,rgba(139,92,246,0.15) 0%,rgba(79,70,229,0.1) 40%,transparent 70%);z-index:2}
-    .model-3d-canvas-wrap{position:absolute;inset:0;border-radius:50%;z-index:4;pointer-events:none;opacity:0}
- 
-    /* RESUME BUTTON */
-    .resume-button{
-      display:inline-block;background-color:var(--accent-light);color:var(--accent-primary);
-      font-weight:600;padding:0.75rem 2rem;border-radius:9999px;box-shadow:var(--button-shadow);
-      transition:all 0.3s ease;margin-top:1rem;
-    }
-    .resume-button:hover{background-color:var(--accent-medium);transform:translateY(-5px);box-shadow:0 15px 25px -5px rgba(0,0,0,0.1)}
- 
-    /* SOCIAL LINKS */
-    .social-links{display:flex;gap:1.5rem;margin-top:1rem;justify-content:center}
-    .social-link{font-size:1.25rem;color:var(--accent-primary);transition:transform 0.3s ease,color 0.3s ease}
-    .social-link:hover{transform:scale(1.2);color:var(--accent-dark)}
- 
-    /* HERO CONTENT (mobile) */
-    .hero-content{
-      display:flex;flex-direction:column;align-items:center;text-align:center;gap:1rem;padding:1rem 0;
-    }
-    .hero-title{font-size:1.75rem;font-weight:700;color:var(--text-primary);margin:0}
-    .hero-subtitle{font-size:0.95rem;color:var(--text-secondary);margin:0;line-height:1.5}
-    .hero-buttons{display:flex;flex-direction:column;align-items:center;gap:0.75rem}
- 
-    /* SECTIONS */
-    .section{
-      margin-bottom:2.5rem;padding:1.5rem;background:var(--card-bg);
-      border-radius:16px;box-shadow:var(--card-shadow);border:1px solid var(--card-border);
-      position:relative;transition:height 0.4s ease;overflow:hidden;
-    }
-    .section-title{
-      font-size:1.5rem;font-weight:700;margin-bottom:1.5rem;position:relative;
-      padding-left:1rem;color:var(--text-primary);
-    }
-    .section-title::before{
-      content:'';position:absolute;left:0;top:0;bottom:0;width:4px;
-      background:var(--accent-primary);border-radius:2px;
-    }
- 
-    /* ABOUT */
-    .about-text{color:var(--text-secondary);line-height:1.7;transition:opacity 0.4s ease}
-    .about-text p{margin-bottom:1.25rem}
-    .philosophy-details{margin-top:1.5rem;border-top:1px solid var(--card-border);padding-top:1rem}
-    .philosophy-details summary{
-      display:flex;align-items:center;justify-content:space-between;
-      padding:0.75rem 1rem;background:var(--accent-light);border:1px solid var(--accent-medium);
-      border-radius:12px;cursor:pointer;font-size:1rem;font-weight:600;color:var(--accent-primary);
-      list-style:none;transition:background 0.2s ease;
-    }
-    .philosophy-details summary::-webkit-details-marker{display:none}
-    .philosophy-details summary::after{content:'+';font-size:1.25rem;transition:transform 0.3s ease}
-    .philosophy-details[open] summary::after{transform:rotate(45deg)}
-    .philosophy-details summary:hover{background:var(--accent-medium)}
-    .philosophy-details .philosophy-content{
-      display:grid;grid-template-rows:1fr;overflow:hidden;
-      padding:1.25rem 0.5rem 0.5rem;animation:slideOpen 0.4s ease-out;
-    }
-    @keyframes slideOpen{
-      from{grid-template-rows:0fr;opacity:0;padding-top:0}
-      to{grid-template-rows:1fr;opacity:1;padding-top:1.25rem}
-    }
-    .philosophy-details .philosophy-content p{margin-bottom:1rem;color:var(--text-secondary);line-height:1.7}
-    .philosophy-details .philosophy-content p:last-child{margin-bottom:0}
-    .philosophy-details .philosophy-content strong{color:var(--text-primary)}
- 
-    /* PROJECTS */
-    .projects-container{display:block;width:100%;position:relative}
-    .ph-blue{background:linear-gradient(135deg,#667eea,#764ba2)}
-    .ph-green{background:linear-gradient(135deg,#11998e,#38ef7d)}
-    .ph-orange{background:linear-gradient(135deg,#f093fb,#f5576c)}
-    .ph-teal{background:linear-gradient(135deg,#4facfe,#00f2fe)}
- 
-    @media (min-width:768px){
-      .projects-carousel-wrapper{position:relative;width:100%}
-      .projects-track{position:relative;width:100%;min-height:660px;padding:0.5rem;margin:-0.5rem}
-      .carousel-slide{
-        display:none;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);
-        gap:1.5rem;row-gap:2rem;width:100%;padding:0.5rem;
+    @media (min-width:768px) {
+      .section {
+        margin-bottom:2.5rem;
+        padding:1.5rem;
+        overflow:visible;
       }
-      .carousel-slide.active{display:grid}
-      .carousel-indicators-container{
-        margin-top:1.75rem;display:flex;justify-content:center;align-items:center;position:relative;
-      }
-      .carousel-counter{
-        position:absolute;right:0;font-size:0.7rem;font-variant-numeric:tabular-nums;
-        letter-spacing:0.04em;color:var(--text-tertiary);opacity:0.45;user-select:none;
-      }
-      .carousel-indicators{display:flex;gap:7px;align-items:center}
-      .carousel-indicator{
-        width:18px;height:13px;border-radius:99px;background:var(--text-tertiary);
-        border:none;cursor:pointer;transition:width 0.25s ease,background 0.25s ease,opacity 0.25s ease;
-        padding:0;opacity:0.35;
-      }
-      .carousel-indicator:hover{opacity:0.6}
-      .carousel-indicator.active{width:40px;background:var(--accent-primary);opacity:1}
-      .dark .carousel-indicator{background:rgba(255,255,255,0.4)}
-      .dark .carousel-indicator.active{background:var(--accent-primary)}
     }
-    @media (max-width:767px){
-      .projects-carousel-wrapper{display:contents}
-      .projects-track{display:contents}
-      .carousel-slide{display:contents}
-      .carousel-indicators-container{display:none!important}
+ 
+    .section-title {
+      font-size:1.3rem;
+      font-weight:700;
+      margin-bottom:1.25rem;
+      position:relative;
+      padding-left:1rem;
+      color:var(--text-primary);
+    }
+ 
+    @media (min-width:768px) {
+      .section-title { font-size:1.5rem; margin-bottom:1.5rem; }
+    }
+ 
+    .section-title::before {
+      content:''; position:absolute; left:0; top:0; bottom:0; width:4px;
+      background:var(--accent-primary); border-radius:2px;
+    }
+ 
+    /* ═══════════════════════════════════════
+       ABOUT
+    ═══════════════════════════════════════ */
+    .about-text { color:var(--text-secondary); line-height:1.7; }
+    .about-text p { margin-bottom:1.25rem; font-size:0.9rem; }
+    @media (min-width:768px) {
+      .about-text p { font-size:1rem; }
+    }
+    .philosophy-details { margin-top:1.5rem; border-top:1px solid var(--card-border); padding-top:1rem; }
+    .philosophy-details summary {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0.75rem 1rem; background:var(--accent-light); border:1px solid var(--accent-medium);
+      border-radius:12px; cursor:pointer; font-size:0.95rem; font-weight:600; color:var(--accent-primary);
+      list-style:none; transition:background 0.2s ease;
+    }
+    .philosophy-details summary::-webkit-details-marker { display:none; }
+    .philosophy-details summary::after { content:'+'; font-size:1.25rem; transition:transform 0.3s ease; }
+    .philosophy-details[open] summary::after { transform:rotate(45deg); }
+    .philosophy-details summary:hover { background:var(--accent-medium); }
+    .philosophy-details .philosophy-content {
+      display:grid; grid-template-rows:1fr; overflow:hidden;
+      padding:1.25rem 0.5rem 0.5rem; animation:slideOpen 0.4s ease-out;
+    }
+    @keyframes slideOpen {
+      from { grid-template-rows:0fr; opacity:0; padding-top:0; }
+      to { grid-template-rows:1fr; opacity:1; padding-top:1.25rem; }
+    }
+    .philosophy-details .philosophy-content p { margin-bottom:1rem; color:var(--text-secondary); line-height:1.7; font-size:0.9rem; }
+    .philosophy-details .philosophy-content p:last-child { margin-bottom:0; }
+    .philosophy-details .philosophy-content strong { color:var(--text-primary); }
+ 
+    /* ═══════════════════════════════════════
+       PROJECTS
+    ═══════════════════════════════════════ */
+    /* MOBILE: horizontal scroll */
+    @media (max-width:767px) {
+      .projects-carousel-wrapper { width:100%; }
+      .projects-track {
+        display:flex;
+        overflow-x:auto;
+        gap:1rem;
+        scroll-snap-type:x mandatory;
+        padding:0.5rem 0.25rem 1rem;
+        scrollbar-width:none;
+        -ms-overflow-style:none;
+        -webkit-overflow-scrolling:touch;
+      }
+      .projects-track::-webkit-scrollbar { display:none; }
+      .carousel-slide { display:contents; }
+      .project-link {
+        flex:0 0 220px;
+        scroll-snap-align:start;
+      }
+      .project-card {
+        height:200px;
+        border-radius:16px;
+      }
+      .carousel-indicators-container { display:none !important; }
+      .mobile-scroll-hint {
+        display:flex;
+        align-items:center;
+        gap:0.4rem;
+        font-size:0.75rem;
+        color:var(--text-tertiary);
+        margin-bottom:0.5rem;
+        padding-left:0.25rem;
+      }
+      .mobile-scroll-hint i { font-size:0.7rem; }
+    }
+ 
+    /* DESKTOP: grid carousel */
+    @media (min-width:768px) {
+      .mobile-scroll-hint { display:none; }
+      .projects-carousel-wrapper { position:relative; width:100%; }
+      .projects-track { position:relative; width:100%; min-height:660px; padding:0.5rem; margin:-0.5rem; }
+      .carousel-slide {
+        display:none;
+        grid-template-columns:repeat(3,1fr);
+        grid-template-rows:repeat(2,1fr);
+        gap:1.5rem; row-gap:2rem;
+        width:100%; padding:0.5rem;
+      }
+      .carousel-slide.active { display:grid; }
+      .carousel-indicators-container {
+        margin-top:1.75rem; display:flex; justify-content:center; align-items:center; position:relative;
+      }
+      .carousel-counter {
+        position:absolute; right:0; font-size:0.7rem; font-variant-numeric:tabular-nums;
+        letter-spacing:0.04em; color:var(--text-tertiary); opacity:0.45; user-select:none;
+      }
+      .carousel-indicators { display:flex; gap:7px; align-items:center; }
+      .carousel-indicator {
+        width:18px; height:13px; border-radius:99px; background:var(--text-tertiary);
+        border:none; cursor:pointer; transition:width 0.25s ease,background 0.25s ease,opacity 0.25s ease;
+        padding:0; opacity:0.35;
+      }
+      .carousel-indicator:hover { opacity:0.6; }
+      .carousel-indicator.active { width:40px; background:var(--accent-primary); opacity:1; }
+      .dark .carousel-indicator { background:rgba(255,255,255,0.4); }
+      .dark .carousel-indicator.active { background:var(--accent-primary); }
     }
  
     /* PROJECT CARDS */
-    .project-link{text-decoration:none;color:inherit}
-    .project-card{
-      position:relative;height:280px;background:var(--card-bg);
-      border-radius:20px;overflow:hidden;display:flex;align-items:center;justify-content:center;
+    .project-link { text-decoration:none; color:inherit; }
+    .project-card {
+      position:relative; height:280px; background:var(--card-bg);
+      border-radius:20px; overflow:hidden; display:flex; align-items:center; justify-content:center;
       box-shadow:var(--card-shadow);
       transition:transform 0.6s cubic-bezier(0.23,1,0.32,1),box-shadow 0.6s cubic-bezier(0.23,1,0.32,1);
-      border:1px solid var(--card-border);transform-style:preserve-3d;will-change:transform;
-      cursor:pointer;
+      border:1px solid var(--card-border); transform-style:preserve-3d; will-change:transform; cursor:pointer;
     }
-    .project-card:hover{box-shadow:0 20px 40px rgba(0,0,0,0.2)}
-    .project-card:hover .project-category{opacity:1;transform:translateY(0)}
-    .project-image{
-      position:absolute;top:0;left:0;width:100%;height:100%;
-      object-fit:cover;z-index:1;
+    .project-card:hover { box-shadow:0 20px 40px rgba(0,0,0,0.2); }
+    .project-card:hover .project-category { opacity:1; transform:translateY(0); }
+    .project-image {
+      position:absolute; top:0; left:0; width:100%; height:100%;
+      object-fit:cover; z-index:1;
       transition:transform 0.5s cubic-bezier(0.23,1,0.32,1);
-      border-radius:20px;will-change:transform;
+      border-radius:20px; will-change:transform;
     }
-    .project-image-placeholder{
-      position:absolute;top:0;left:0;width:100%;height:100%;
-      z-index:1;border-radius:20px;
-    }
-    .project-title-chip{
-      position:relative;padding:0.75rem 1.5rem;border-radius:28px;isolation:isolate;
+    .project-title-chip {
+      position:relative; padding:0.75rem 1.5rem; border-radius:28px; isolation:isolate;
       box-shadow:0px 6px var(--outer-shadow-blur) rgba(0,0,0,0.2);
-      z-index:5;text-align:center;max-width:90%;
+      z-index:5; text-align:center; max-width:90%;
       transition:transform 0.5s cubic-bezier(0.23,1,0.32,1);
-      display:flex;align-items:center;justify-content:center;
-      transform-style:preserve-3d;will-change:transform;
+      display:flex; align-items:center; justify-content:center;
+      transform-style:preserve-3d; will-change:transform;
     }
-    .project-title-chip::before{
-      content:'';position:absolute;inset:0;z-index:-1;border-radius:28px;
+    .project-title-chip::before {
+      content:''; position:absolute; inset:0; z-index:-1; border-radius:28px;
       box-shadow:inset var(--shadow-offset) var(--shadow-offset) var(--shadow-blur) var(--shadow-spread) var(--shadow-color);
       background-color:rgba(var(--tint-color),var(--tint-opacity));
     }
-    .project-title-chip::after{
-      content:'';position:absolute;inset:0;z-index:-2;border-radius:28px;
-      backdrop-filter:blur(var(--frost-blur));-webkit-backdrop-filter:blur(var(--frost-blur));
+    .project-title-chip::after {
+      content:''; position:absolute; inset:0; z-index:-2; border-radius:28px;
+      backdrop-filter:blur(var(--frost-blur)); -webkit-backdrop-filter:blur(var(--frost-blur));
     }
-    .project-title-chip h3{
-      margin:0;font-size:1rem;font-weight:700;
-      color:#212529;text-shadow:0 1px 1px rgba(255,255,255,0.5);
+    .project-title-chip h3 {
+      margin:0; font-size:0.9rem; font-weight:700;
+      color:#212529; text-shadow:0 1px 1px rgba(255,255,255,0.5);
     }
-    .project-category{
-      position:absolute;top:15px;left:15px;z-index:10;
-      padding:6px 12px;border-radius:8px;font-size:0.75rem;font-weight:600;
-      text-transform:uppercase;background:rgba(255,255,255,0.85);
-      backdrop-filter:blur(8px);color:var(--accent-primary);
-      box-shadow:0 2px 8px rgba(0,0,0,0.12);display:block;
-      opacity:0;transform:translateY(-8px);transition:opacity 0.3s ease,transform 0.3s ease;
+    .project-category {
+      position:absolute; top:12px; left:12px; z-index:10;
+      padding:5px 10px; border-radius:8px; font-size:0.7rem; font-weight:600;
+      text-transform:uppercase; background:rgba(255,255,255,0.85);
+      backdrop-filter:blur(8px); color:var(--accent-primary);
+      box-shadow:0 2px 8px rgba(0,0,0,0.12);
+      opacity:0; transform:translateY(-8px); transition:opacity 0.3s ease,transform 0.3s ease;
     }
-    .project-content{display:none}
-    .project-description{display:none}
-    @media (max-width:767px){
-      .projects-container{
-        display:flex;overflow-x:auto;gap:1rem;
-        scroll-snap-type:x mandatory;padding:0.5rem 0 1rem;
-        scrollbar-width:none;-ms-overflow-style:none;
-      }
-      .projects-container::-webkit-scrollbar{display:none}
-      .project-link{flex:0 0 260px;scroll-snap-align:start}
-      .project-card{height:220px}
+    /* Always show category on mobile (no hover) */
+    @media (max-width:767px) {
+      .project-category { opacity:1; transform:translateY(0); }
     }
  
-    /* SKILLS */
-    .skills-category{margin-bottom:2rem}
-    .category-title{
-      font-size:1.1rem;font-weight:600;margin-bottom:1rem;color:var(--text-primary);
-      display:flex;align-items:center;gap:0.5rem;
+    /* ═══════════════════════════════════════
+       SKILLS
+    ═══════════════════════════════════════ */
+    .skills-category { margin-bottom:1.5rem; }
+    .category-title {
+      font-size:1rem; font-weight:600; margin-bottom:0.75rem; color:var(--text-primary);
+      display:flex; align-items:center; gap:0.5rem;
     }
-    .category-title::before{content:'';width:8px;height:8px;background:var(--accent-primary);border-radius:50%}
-    .skills-container{
-      display:flex;flex-wrap:nowrap;gap:0.75rem;overflow-x:auto;
-      scroll-snap-type:x mandatory;padding:0.5rem 0;
-      scrollbar-width:none;-ms-overflow-style:none;
+    .category-title::before { content:''; width:8px; height:8px; background:var(--accent-primary); border-radius:50%; flex-shrink:0; }
+    .skills-container {
+      display:flex; flex-wrap:nowrap; gap:0.6rem; overflow-x:auto;
+      scroll-snap-type:x mandatory; padding:0.25rem 0 0.75rem;
+      scrollbar-width:none; -ms-overflow-style:none;
     }
-    .skills-container::-webkit-scrollbar{display:none}
-    @media (min-width:768px){
-      .skills-container{display:flex;flex-wrap:wrap;gap:0.75rem;overflow-x:visible;scroll-snap-type:none;padding:0.5rem 0;justify-content:flex-start}
+    .skills-container::-webkit-scrollbar { display:none; }
+    @media (min-width:768px) {
+      .skills-container { flex-wrap:wrap; overflow-x:visible; scroll-snap-type:none; padding:0.5rem 0; }
     }
-    .skill-badge{
-      flex:0 0 auto;padding:0.6rem 1.2rem;background:var(--accent-light);color:var(--accent-primary);
-      border:1px solid var(--accent-medium);border-radius:16px;font-size:0.85rem;font-weight:500;
-      transition:all 0.2s ease;scroll-snap-align:start;white-space:nowrap;
+    .skill-badge {
+      flex:0 0 auto; padding:0.5rem 1rem; background:var(--accent-light); color:var(--accent-primary);
+      border:1px solid var(--accent-medium); border-radius:16px; font-size:0.8rem; font-weight:500;
+      transition:all 0.2s ease; scroll-snap-align:start; white-space:nowrap;
     }
-    .skill-badge:hover{background:var(--accent-primary);color:white;transform:translateY(-2px);box-shadow:0 4px 12px rgba(91,70,255,0.3);border:1px solid transparent}
-    .dark .skill-badge{background:var(--accent-light);color:var(--accent-primary);border:1px solid var(--accent-medium)}
+    .skill-badge:hover { background:var(--accent-primary); color:white; transform:translateY(-2px); box-shadow:0 4px 12px rgba(91,70,255,0.3); border:1px solid transparent; }
  
-    /* EXPERIENCE */
-    .experience-list{display:flex;flex-direction:column;gap:1.25rem}
-    .experience-item{
-      padding:1.5rem;background:var(--card-bg);border:1px solid var(--card-border);
-      border-radius:12px;margin-bottom:1rem;transition:all 0.3s ease;
+    /* ═══════════════════════════════════════
+       EXPERIENCE
+    ═══════════════════════════════════════ */
+    .experience-list { display:flex; flex-direction:column; gap:1rem; }
+    .experience-item {
+      padding:1.25rem; background:var(--card-bg); border:1px solid var(--card-border);
+      border-radius:12px; transition:all 0.3s ease;
     }
-    .experience-item:hover{box-shadow:var(--card-shadow)}
-    .experience-title{font-size:1.25rem;font-weight:600;color:var(--accent-primary);margin-bottom:0.25rem}
-    .experience-company{font-size:1.1rem;color:var(--text-primary);font-weight:500;margin-bottom:0.25rem}
-    .experience-description{font-size:1rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1rem}
-    .experience-tech{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem}
-    .tech-tag{
-      display:inline-block;padding:0.25rem 0.75rem;font-size:0.75rem;font-weight:500;
-      color:var(--accent-primary);background:rgba(91,70,255,0.1);
-      border:1px solid rgba(91,70,255,0.2);border-radius:20px;transition:all 0.2s ease;
+    @media (min-width:768px) {
+      .experience-item { padding:1.5rem; }
     }
-    .tech-tag:hover{background:rgba(91,70,255,0.15);border-color:rgba(91,70,255,0.3)}
-    .dark .tech-tag{background:rgba(139,92,246,0.15);border-color:rgba(139,92,246,0.25);color:var(--accent-primary)}
+    .experience-item:hover { box-shadow:var(--card-shadow); }
+    .experience-title { font-size:1.1rem; font-weight:600; color:var(--accent-primary); margin-bottom:0.25rem; }
+    .experience-company { font-size:0.9rem; color:var(--text-primary); font-weight:500; margin-bottom:0.5rem; }
+    .experience-description { font-size:0.875rem; color:var(--text-secondary); line-height:1.6; margin-bottom:0.75rem; }
+    @media (min-width:768px) {
+      .experience-title { font-size:1.25rem; }
+      .experience-company { font-size:1rem; }
+      .experience-description { font-size:1rem; margin-bottom:1rem; }
+    }
+    .experience-tech { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.75rem; }
+    .tech-tag {
+      display:inline-block; padding:0.2rem 0.6rem; font-size:0.72rem; font-weight:500;
+      color:var(--accent-primary); background:rgba(91,70,255,0.1);
+      border:1px solid rgba(91,70,255,0.2); border-radius:20px; transition:all 0.2s ease;
+    }
+    .tech-tag:hover { background:rgba(91,70,255,0.15); border-color:rgba(91,70,255,0.3); }
+    .dark .tech-tag { background:rgba(139,92,246,0.15); border-color:rgba(139,92,246,0.25); color:var(--accent-primary); }
  
-    /* FOOTER */
-    footer{
-      background:var(--header-bg);padding:1.5rem;text-align:center;
-      color:rgba(255,255,255,0.8);transition:background-color 0.3s ease;
-      border-radius:0 0 1.5rem 1.5rem;
+    /* ═══════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════ */
+    footer {
+      background:var(--header-bg); padding:1.25rem; text-align:center;
+      color:rgba(255,255,255,0.8); transition:background-color 0.3s ease;
+      border-radius:0 0 0.75rem 0.75rem;
+      font-size:0.875rem;
+    }
+    @media (min-width:768px) {
+      footer { border-radius:0 0 1.5rem 1.5rem; padding:1.5rem; }
     }
  
-    /* ── LANGUAGE TRANSITION ── */
-    [data-en],[data-fr]{transition:opacity 0.2s ease}
+    /* ═══════════════════════════════════════
+       LANG TRANSITION
+    ═══════════════════════════════════════ */
+    [data-en],[data-fr] { transition:opacity 0.2s ease; }
   </style>
 </head>
 <body>
   <div class="content-wrapper">
  
-    <!-- Mobile controls: theme + lang -->
-    <div class="header-controls mobile-only" id="controls-mobile">
-      <button aria-label="Toggle language" class="lang-toggle" id="lang-toggle-mobile">FR</button>
-      <button aria-label="Toggle dark mode" class="theme-toggle" id="theme-toggle-mobile"><i class="fas fa-moon"></i></button>
+    <!-- ── MOBILE HEADER (visible only on mobile) ── -->
+    <div class="mobile-header">
+      <div class="mobile-header-top">
+        <div class="mobile-header-name">MOBIN MIR</div>
+        <div class="mobile-header-controls header-controls mobile-only" id="controls-mobile">
+          <button aria-label="Toggle language" class="lang-toggle" id="lang-toggle-mobile">FR</button>
+          <button aria-label="Toggle dark mode" class="theme-toggle" id="theme-toggle-mobile"><i class="fas fa-moon"></i></button>
+        </div>
+      </div>
+      <div class="mobile-header-subtitle" id="mobile-subtitle">Digital Marketing | SEO &amp; WordPress Web Developer</div>
+      <nav class="mobile-header-nav">
+        <a class="mobile-nav-link" href="#about-section" data-en="About" data-fr="À propos">About</a>
+        <a class="mobile-nav-link" href="#projects-section" data-en="Projects" data-fr="Projets">Projects</a>
+        <a class="mobile-nav-link" href="#skills-section" data-en="Skills" data-fr="Compétences">Skills</a>
+        <a class="mobile-nav-link" href="#experiences-section" data-en="Experience" data-fr="Expérience">Experience</a>
+      </nav>
     </div>
  
+    <!-- ── DESKTOP HEADER ── -->
     <header>
-      <!-- Desktop controls: theme + lang -->
       <div class="header-controls desktop-only" id="controls-desktop">
         <button aria-label="Toggle language" class="lang-toggle" id="lang-toggle-desktop">FR</button>
         <button aria-label="Toggle dark mode" class="theme-toggle" id="theme-toggle-desktop"><i class="fas fa-moon"></i></button>
       </div>
- 
       <div class="header-content">
         <h1 id="nameHeader">MOBIN MIR</h1>
         <p id="headerSubtitle">Digital Marketing | SEO &amp; WordPress Web Developer</p>
@@ -618,14 +811,13 @@
             <div class="profile-photo-wrapper" id="profile-wrapper">
               <div class="model-3d-canvas-wrap"><canvas id="model-canvas"></canvas></div>
               <div class="profile-photo"></div>
-              <!-- Memoji overlay that reacts to mouse -->
               <div class="memoji-overlay" id="memoji-overlay"></div>
               <div class="shine"></div>
               <div class="opposite-shine"></div>
             </div>
           </div>
  
-          <!-- Mobile hero -->
+          <!-- Mobile hero (inside sidebar card) -->
           <div class="hero-content">
             <h1 class="hero-title">Mobin MIR</h1>
             <p class="hero-subtitle" data-en="Digital Marketing | SEO &amp; Web Developer WordPress" data-fr="Marketing Digital | SEO &amp; Développeur Web WordPress">Digital Marketing | SEO &amp; Web Developer WordPress</p>
@@ -638,10 +830,10 @@
             </div>
           </div>
  
-          <!-- Desktop sidebar -->
+          <!-- Desktop sidebar content -->
           <div class="desktop-sidebar-content">
             <h2 class="sidebar-name">Mobin MIR</h2>
-            <p class="sidebar-title" data-en="SEO & Digital Marketing Specialist<br/>Web Developer, WordPress" data-fr="Spécialiste SEO & Marketing Digital<br/>Développeur Web, WordPress">SEO &amp; Digital Marketing Specialist <br/>Web Developer, WordPress</p>
+            <p class="sidebar-title" data-en="SEO & Digital Marketing Specialist<br/>Web Developer, WordPress" data-fr="Spécialiste SEO & Marketing Digital<br/>Développeur Web, WordPress">SEO &amp; Digital Marketing Specialist<br/>Web Developer, WordPress</p>
             <a class="resume-button" href="Cv mobz .pdf" download data-en="View Resume" data-fr="Voir CV">View Resume</a>
             <div class="social-links">
               <a class="social-link" href="https://www.linkedin.com/in/mobin-miro-4a8608222" target="_blank"><i class="fab fa-linkedin"></i></a>
@@ -659,14 +851,13 @@
           <div class="about-text" id="about-me">
             <p data-en="I'm Mobin, an SEO and Digital Marketing specialist focused on WordPress and web development." data-fr="Je suis Mobin, spécialiste SEO et Marketing Digital, axé sur WordPress et le développement web.">I'm Mobin, an SEO and Digital Marketing specialist focused on WordPress and web development.</p>
             <p data-en="I earned my Bachelor's degree (Bac+3) from ISCOD, where I combined academic learning with hands-on experience in website management, SEO, and digital optimization." data-fr="J'ai obtenu mon Bachelor (Bac+3) à l'ISCOD, où j'ai combiné apprentissage académique et expérience pratique en gestion de sites web, SEO et optimisation digitale.">I earned my Bachelor's degree (Bac+3) from ISCOD, where I combined academic learning with hands-on experience in website management, SEO, and digital optimization.</p>
-            <p data-en="I'm passionate about helping brands grow online by building websites that are both visually professional and optimized for strong search performance. My experience includes technical SEO, content optimization, website analytics, WordPress management, and improving user experience. I enjoy working on projects that create real impact — whether that's increasing a website's visibility on Google, improving site structure and performance, or solving technical and digital challenges. I approach problems with curiosity, adaptability, and a strong focus on finding effective long-term solutions, not just quick fixes." data-fr="Je suis passionné par l'aide aux marques pour leur croissance en ligne, en construisant des sites web à la fois visuellement professionnels et optimisés pour les moteurs de recherche. Mon expérience inclut le SEO technique, l'optimisation de contenu, l'analyse web, la gestion WordPress et l'amélioration de l'expérience utilisateur. J'aime travailler sur des projets à fort impact — qu'il s'agisse d'améliorer la visibilité sur Google, d'optimiser la structure du site ou de résoudre des défis techniques et digitaux.">I'm passionate about helping brands grow online by building websites that are both visually professional and optimized for strong search performance. My experience includes technical SEO, content optimization, website analytics, WordPress management, and improving user experience. I enjoy working on projects that create real impact — whether that's increasing a website's visibility on Google, improving site structure and performance, or solving technical and digital challenges. I approach problems with curiosity, adaptability, and a strong focus on finding effective long-term solutions, not just quick fixes.</p>
+            <p data-en="I'm passionate about helping brands grow online by building websites that are both visually professional and optimized for strong search performance. My experience includes technical SEO, content optimization, website analytics, WordPress management, and improving user experience." data-fr="Je suis passionné par l'aide aux marques pour leur croissance en ligne, en construisant des sites web à la fois visuellement professionnels et optimisés pour les moteurs de recherche. Mon expérience inclut le SEO technique, l'optimisation de contenu, l'analyse web, la gestion WordPress et l'amélioration de l'expérience utilisateur.">I'm passionate about helping brands grow online by building websites that are both visually professional and optimized for strong search performance. My experience includes technical SEO, content optimization, website analytics, WordPress management, and improving user experience.</p>
             <details class="philosophy-details">
               <summary data-en="My Philosophy" data-fr="Ma Philosophie">My Philosophy</summary>
               <div class="philosophy-content">
-                <p data-en="<strong>I work across SEO, digital marketing,</strong> WordPress, and web development with a problem-solving mindset. Whether it's improving a website's visibility on Google, optimizing technical performance, managing content strategy, or enhancing user experience, I'm comfortable moving between technical and creative challenges. What matters most to me is building solutions that create real impact." data-fr="<strong>Je travaille dans le SEO, le marketing digital,</strong> WordPress et le développement web avec un esprit orienté solutions. Qu'il s'agisse d'améliorer la visibilité d'un site sur Google, d'optimiser les performances techniques ou d'améliorer l'expérience utilisateur, je suis à l'aise entre défis techniques et créatifs. Ce qui compte le plus pour moi, c'est de construire des solutions à fort impact."><strong>I work across SEO, digital marketing,</strong> WordPress, and web development with a problem-solving mindset. Whether it's improving a website's visibility on Google, optimizing technical performance, managing content strategy, or enhancing user experience, I'm comfortable moving between technical and creative challenges. What matters most to me is building solutions that create real impact.</p>
-                <p data-en="<strong>I believe good digital</strong> work should be both effective and sustainable. I focus on understanding what users actually need, then make clear decisions around performance, structure, SEO, and usability. From clean website organization to optimized content and user-friendly interfaces, I value simplicity, clarity, and long-term efficiency." data-fr="<strong>Je crois que le bon travail digital</strong> doit être à la fois efficace et durable. Je me concentre sur la compréhension des besoins réels des utilisateurs, puis je prends des décisions claires en matière de performance, de structure, de SEO et d'utilisabilité. De l'organisation du site au contenu optimisé, je valorise la simplicité, la clarté et l'efficacité à long terme."><strong>I believe good digital</strong> work should be both effective and sustainable. I focus on understanding what users actually need, then make clear decisions around performance, structure, SEO, and usability. From clean website organization to optimized content and user-friendly interfaces, I value simplicity, clarity, and long-term efficiency.</p>
-                <p data-en="<strong>I'm also someone who enjoys digging into problems.</strong> When something breaks or underperforms, I like analyzing the root cause, testing solutions methodically, and improving systems step by step. I work well with teams, communicate openly, and adapt quickly when priorities change or new challenges appear." data-fr="<strong>J'apprécie également de creuser les problèmes.</strong> Quand quelque chose ne fonctionne pas, j'aime analyser la cause racine, tester des solutions méthodiquement et améliorer les systèmes étape par étape. Je travaille bien en équipe, je communique ouvertement et je m'adapte rapidement quand les priorités changent."><strong>I'm also someone who enjoys digging into problems.</strong> When something breaks or underperforms, I like analyzing the root cause, testing solutions methodically, and improving systems step by step. I work well with teams, communicate openly, and adapt quickly when priorities change or new challenges appear.</p>
-                <p data-en="<strong>Most importantly,</strong> I'm rigorous about testing and evaluation, but I'm not dogmatic. The best insights come from teammates, users, and data. I stay curious, adjust based on what I'm learning, and get better at my craft continuously." data-fr="<strong>Avant tout,</strong> je suis rigoureux dans les tests et l'évaluation, sans être dogmatique. Les meilleures idées viennent des coéquipiers, des utilisateurs et des données. Je reste curieux, je m'ajuste en fonction de ce que j'apprends, et je m'améliore continuellement."><strong>Most importantly,</strong> I'm rigorous about testing and evaluation, but I'm not dogmatic. The best insights come from teammates, users, and data. I stay curious, adjust based on what I'm learning, and get better at my craft continuously.</p>
+                <p data-en="<strong>I work across SEO, digital marketing,</strong> WordPress, and web development with a problem-solving mindset. Whether it's improving a website's visibility on Google, optimizing technical performance, managing content strategy, or enhancing user experience, I'm comfortable moving between technical and creative challenges. What matters most to me is building solutions that create real impact." data-fr="<strong>Je travaille dans le SEO, le marketing digital,</strong> WordPress et le développement web avec un esprit orienté solutions. Ce qui compte le plus pour moi, c'est de construire des solutions à fort impact."><strong>I work across SEO, digital marketing,</strong> WordPress, and web development with a problem-solving mindset. What matters most to me is building solutions that create real impact.</p>
+                <p data-en="<strong>I believe good digital</strong> work should be both effective and sustainable. I focus on understanding what users actually need, then make clear decisions around performance, structure, SEO, and usability." data-fr="<strong>Je crois que le bon travail digital</strong> doit être à la fois efficace et durable. Je me concentre sur la compréhension des besoins réels des utilisateurs."><strong>I believe good digital</strong> work should be both effective and sustainable. I focus on understanding what users actually need, then make clear decisions around performance, structure, SEO, and usability.</p>
+                <p data-en="<strong>Most importantly,</strong> I'm rigorous about testing and evaluation, but I'm not dogmatic. The best insights come from teammates, users, and data. I stay curious, adjust based on what I'm learning, and get better at my craft continuously." data-fr="<strong>Avant tout,</strong> je suis rigoureux dans les tests et l'évaluation, sans être dogmatique. Je reste curieux et je m'améliore continuellement."><strong>Most importantly,</strong> I'm rigorous about testing and evaluation. The best insights come from teammates, users, and data. I stay curious and get better at my craft continuously.</p>
               </div>
             </details>
           </div>
@@ -675,58 +866,60 @@
         <!-- PROJECTS -->
         <section class="section" id="projects-section">
           <h2 class="section-title" data-en="Projects" data-fr="Projets">Projects</h2>
-          <div class="projects-container" id="projects-container">
-            <div class="projects-carousel-wrapper">
-              <div class="projects-track" id="projects-track">
-                <div class="carousel-slide active">
-                  <a class="project-link" href="src/ai-recommender-system.html">
-                    <div class="project-card">
-                      <div class="project-category">SEO</div>
-                      <img src="/1.png" alt="WordPress Website Design" class="project-image">
-                      <div class="project-title-chip"><h3 data-en="SEO Optimization Projects" data-fr="Projets d'Optimisation SEO">SEO Optimization Projects</h3></div>
-                    </div>
-                  </a>
-                  <a class="project-link" href="https://chalky-app.com" target="_blank">
-                    <div class="project-card">
-                      <div class="project-category">WORDPRESS</div>
-                      <img src="./s.png" alt="WordPress Website Design" class="project-image">
-                      <div class="project-title-chip"><h3 data-en="WordPress Website Design" data-fr="Design Site WordPress">WordPress Website Design</h3></div>
-                    </div>
-                  </a>
-                  <a class="project-link" href="http://kfswire.com/" target="_blank">
-                    <div class="project-card">
-                      <div class="project-category">WORDPRESS</div>
-                      <img src="./Slide 1.png" alt="WordPress Website Design" class="project-image">
-                      <div class="project-title-chip"><h3 data-en="WordPress Website Design" data-fr="Design Site WordPress">WordPress Website Design</h3></div>
-                    </div>
-                  </a>
-                  <a class="project-link" href="src/clustering-visualization.html">
-                    <div class="project-card">
-                      <div class="project-category">LOGO</div>
-                      <img src="./kfs-logo-1080x1350.jpg" alt="Logo Design" class="project-image">
-                      <div class="project-title-chip"><h3 data-en="Logo Design" data-fr="Design de Logo">Logo Design</h3></div>
-                    </div>
-                  </a>
-                  <a class="project-link" href="src/tts-refiner.html">
-                    <div class="project-card">
-                      <div class="project-category">INSTAGRAM</div>
-                      <img src="./ins.png" alt="Digital Marketing" class="project-image">
-                      <div class="project-title-chip"><h3 data-en="Digital Marketing" data-fr="Marketing Digital">Digital Marketing</h3></div>
-                    </div>
-                  </a>
-                  <a class="project-link" href="src/gan-study.html">
-                    <div class="project-card">
-                      <div class="project-category">Adobe</div>
-                      <img src="./apple.png" alt="Photoshop" class="project-image">
-                      <div class="project-title-chip"><h3 data-en="Photoshop" data-fr="Photoshop">Photoshop</h3></div>
-                    </div>
-                  </a>
-                </div>
+          <div class="mobile-scroll-hint">
+            <i class="fas fa-hand-point-right"></i>
+            <span data-en="Swipe to see more" data-fr="Faites glisser pour voir plus">Swipe to see more</span>
+          </div>
+          <div class="projects-carousel-wrapper">
+            <div class="projects-track" id="projects-track">
+              <div class="carousel-slide active">
+                <a class="project-link" href="src/ai-recommender-system.html">
+                  <div class="project-card">
+                    <div class="project-category">SEO</div>
+                    <img src="/1.png" alt="SEO Optimization Projects" class="project-image">
+                    <div class="project-title-chip"><h3 data-en="SEO Optimization Projects" data-fr="Projets d'Optimisation SEO">SEO Optimization Projects</h3></div>
+                  </div>
+                </a>
+                <a class="project-link" href="https://chalky-app.com" target="_blank">
+                  <div class="project-card">
+                    <div class="project-category">WORDPRESS</div>
+                    <img src="./s.png" alt="WordPress Website Design" class="project-image">
+                    <div class="project-title-chip"><h3 data-en="WordPress Website Design" data-fr="Design Site WordPress">WordPress Website Design</h3></div>
+                  </div>
+                </a>
+                <a class="project-link" href="http://kfswire.com/" target="_blank">
+                  <div class="project-card">
+                    <div class="project-category">WORDPRESS</div>
+                    <img src="./Slide 1.png" alt="WordPress Website Design" class="project-image">
+                    <div class="project-title-chip"><h3 data-en="WordPress Website Design" data-fr="Design Site WordPress">WordPress Website Design</h3></div>
+                  </div>
+                </a>
+                <a class="project-link" href="src/clustering-visualization.html">
+                  <div class="project-card">
+                    <div class="project-category">LOGO</div>
+                    <img src="./kfs-logo-1080x1350.jpg" alt="Logo Design" class="project-image">
+                    <div class="project-title-chip"><h3 data-en="Logo Design" data-fr="Design de Logo">Logo Design</h3></div>
+                  </div>
+                </a>
+                <a class="project-link" href="src/tts-refiner.html">
+                  <div class="project-card">
+                    <div class="project-category">INSTAGRAM</div>
+                    <img src="./ins.png" alt="Digital Marketing" class="project-image">
+                    <div class="project-title-chip"><h3 data-en="Digital Marketing" data-fr="Marketing Digital">Digital Marketing</h3></div>
+                  </div>
+                </a>
+                <a class="project-link" href="src/gan-study.html">
+                  <div class="project-card">
+                    <div class="project-category">ADOBE</div>
+                    <img src="./apple.png" alt="Photoshop" class="project-image">
+                    <div class="project-title-chip"><h3 data-en="Photoshop" data-fr="Photoshop">Photoshop</h3></div>
+                  </div>
+                </a>
               </div>
-              <div class="carousel-indicators-container">
-                <div class="carousel-indicators" id="carousel-indicators"></div>
-                <span class="carousel-counter" id="carousel-counter"></span>
-              </div>
+            </div>
+            <div class="carousel-indicators-container">
+              <div class="carousel-indicators" id="carousel-indicators"></div>
+              <span class="carousel-counter" id="carousel-counter"></span>
             </div>
           </div>
         </section>
@@ -785,8 +978,8 @@
             <div class="experience-item">
               <h3 class="experience-title" data-en="SEO &amp; Digital Marketing" data-fr="SEO &amp; Marketing Digital">SEO &amp; Digital Marketing</h3>
               <p class="experience-company">Digital &amp; Co | Paris, France | Sep 2025 – Present</p>
-              <p class="experience-description" data-en="Contributed to the launch and online growth of the company's new website, created to replace the previous Digital and Cie platform. Focused on SEO optimization, search visibility, website performance, and digital growth strategies." data-fr="Contribué au lancement et à la croissance en ligne du nouveau site de l'entreprise. Axé sur l'optimisation SEO, la visibilité dans les moteurs de recherche, les performances du site web et les stratégies de croissance digitale.">Contributed to the launch and online growth of the company's new website, created to replace the previous Digital and Cie platform. Focused on SEO optimization, search visibility, website performance, and digital growth strategies.</p>
-              <p class="experience-description" data-en="● Worked on technical SEO and on-page optimization to improve search engine visibility.<br>● Monitored website performance and indexing through Google Search Console and Google Analytics.<br>● Helped improve the overall SEO performance of the new website after its launch.<br>● Participated in digital marketing and online branding strategies." data-fr="● Travaillé sur le SEO technique et l'optimisation on-page pour améliorer la visibilité dans les moteurs de recherche.<br>● Suivi des performances et de l'indexation via Google Search Console et Google Analytics.<br>● Contribué à l'amélioration globale du SEO du nouveau site après son lancement.<br>● Participé aux stratégies de marketing digital et de branding en ligne.">● Worked on technical SEO and on-page optimization to improve search engine visibility.<br>● Monitored website performance and indexing through Google Search Console and Google Analytics.<br>● Helped improve the overall SEO performance of the new website after its launch.<br>● Participated in digital marketing and online branding strategies.</p>
+              <p class="experience-description" data-en="Contributed to the launch and online growth of the company's new website. Focused on SEO optimization, search visibility, website performance, and digital growth strategies." data-fr="Contribué au lancement et à la croissance en ligne du nouveau site de l'entreprise. Axé sur l'optimisation SEO, la visibilité dans les moteurs de recherche et les stratégies de croissance digitale.">Contributed to the launch and online growth of the company's new website. Focused on SEO optimization, search visibility, website performance, and digital growth strategies.</p>
+              <p class="experience-description" data-en="● Worked on technical SEO and on-page optimization to improve search engine visibility.<br>● Monitored website performance and indexing through Google Search Console and Google Analytics.<br>● Helped improve the overall SEO performance of the new website after its launch.<br>● Participated in digital marketing and online branding strategies." data-fr="● Travaillé sur le SEO technique et l'optimisation on-page.<br>● Suivi des performances via Google Search Console et Google Analytics.<br>● Contribué à l'amélioration globale du SEO du nouveau site.<br>● Participé aux stratégies de marketing digital et de branding en ligne.">● Worked on technical SEO and on-page optimization to improve search engine visibility.<br>● Monitored website performance and indexing through Google Search Console and Google Analytics.<br>● Helped improve the overall SEO performance of the new website after its launch.<br>● Participated in digital marketing and online branding strategies.</p>
               <div class="experience-tech">
                 <span class="tech-tag">Search Console</span><span class="tech-tag">Keyword Research</span><span class="tech-tag">Technical SEO</span>
               </div>
@@ -794,8 +987,8 @@
             <div class="experience-item">
               <h3 class="experience-title" data-en="Freelance SEO Consultant" data-fr="Consultant SEO Freelance">Freelance SEO Consultant</h3>
               <p class="experience-company">Izacoil | Dubai, UAE | Jan 2025 – Aug 2025</p>
-              <p class="experience-description" data-en="Worked on SEO consulting and digital visibility strategies to improve website performance and online presence. Focused on search optimization, technical SEO recommendations, and website analysis for better search engine visibility and user reach." data-fr="Travaillé sur le consulting SEO et les stratégies de visibilité digitale pour améliorer les performances des sites web. Axé sur l'optimisation des recherches, les recommandations SEO techniques et l'analyse des sites web.">Worked on SEO consulting and digital visibility strategies to improve website performance and online presence. Focused on search optimization, technical SEO recommendations, and website analysis for better search engine visibility and user reach.</p>
-              <p class="experience-description" data-en="● Conducted SEO audits and website performance analysis.<br>● Worked on keyword research and on-page SEO improvements.<br>● Analyzed website structure, indexing, and search visibility performance.<br>● Contributed to digital growth and online branding strategies." data-fr="● Réalisé des audits SEO et des analyses de performances de sites web.<br>● Travaillé sur la recherche de mots-clés et les améliorations SEO on-page.<br>● Analysé la structure des sites, l'indexation et les performances de visibilité.<br>● Contribué aux stratégies de croissance digitale et de branding en ligne.">● Conducted SEO audits and website performance analysis.<br>● Worked on keyword research and on-page SEO improvements.<br>● Analyzed website structure, indexing, and search visibility performance.<br>● Contributed to digital growth and online branding strategies.</p>
+              <p class="experience-description" data-en="Worked on SEO consulting and digital visibility strategies to improve website performance and online presence. Focused on search optimization, technical SEO recommendations, and website analysis." data-fr="Travaillé sur le consulting SEO et les stratégies de visibilité digitale. Axé sur l'optimisation des recherches, les recommandations SEO techniques et l'analyse des sites web.">Worked on SEO consulting and digital visibility strategies to improve website performance and online presence. Focused on search optimization, technical SEO recommendations, and website analysis.</p>
+              <p class="experience-description" data-en="● Conducted SEO audits and website performance analysis.<br>● Worked on keyword research and on-page SEO improvements.<br>● Analyzed website structure, indexing, and search visibility performance.<br>● Contributed to digital growth and online branding strategies." data-fr="● Réalisé des audits SEO et des analyses de performances.<br>● Travaillé sur la recherche de mots-clés et les améliorations SEO on-page.<br>● Analysé la structure des sites et les performances de visibilité.<br>● Contribué aux stratégies de croissance digitale et de branding.">● Conducted SEO audits and website performance analysis.<br>● Worked on keyword research and on-page SEO improvements.<br>● Analyzed website structure, indexing, and search visibility performance.<br>● Contributed to digital growth and online branding strategies.</p>
               <div class="experience-tech">
                 <span class="tech-tag">Technical SEO</span><span class="tech-tag">Keyword Research</span><span class="tech-tag">Search Visibility</span><span class="tech-tag">Digital Strategy</span>
               </div>
@@ -803,8 +996,8 @@
             <div class="experience-item">
               <h3 class="experience-title" data-en="Freelance Graphic Designer" data-fr="Designer Graphique Freelance">Freelance Graphic Designer</h3>
               <p class="experience-company">Freelance | Jan 2024 – Dec 2024</p>
-              <p class="experience-description" data-en="Worked on graphic design and visual content creation using Adobe Photoshop for companies and digital brands. Focused on creating professional and impactful visuals for marketing, branding, and online communication across different digital platforms." data-fr="Travaillé sur le design graphique et la création de contenu visuel avec Adobe Photoshop pour des entreprises et des marques digitales. Axé sur la création de visuels professionnels pour le marketing, le branding et la communication en ligne.">Worked on graphic design and visual content creation using Adobe Photoshop for companies and digital brands. Focused on creating professional and impactful visuals for marketing, branding, and online communication across different digital platforms.</p>
-              <p class="experience-description" data-en="● Designed promotional visuals, banners, and marketing content for companies.<br>● Worked on visual identity, content presentation, and creative layouts." data-fr="● Conçu des visuels promotionnels, des bannières et du contenu marketing pour des entreprises.<br>● Travaillé sur l'identité visuelle, la présentation de contenu et les mises en page créatives.">● Designed promotional visuals, banners, and marketing content for companies.<br>● Worked on visual identity, content presentation, and creative layouts.</p>
+              <p class="experience-description" data-en="Worked on graphic design and visual content creation using Adobe Photoshop for companies and digital brands." data-fr="Travaillé sur le design graphique et la création de contenu visuel avec Adobe Photoshop pour des entreprises et des marques digitales.">Worked on graphic design and visual content creation using Adobe Photoshop for companies and digital brands.</p>
+              <p class="experience-description" data-en="● Designed promotional visuals, banners, and marketing content for companies.<br>● Worked on visual identity, content presentation, and creative layouts." data-fr="● Conçu des visuels promotionnels, des bannières et du contenu marketing.<br>● Travaillé sur l'identité visuelle, la présentation de contenu et les mises en page créatives.">● Designed promotional visuals, banners, and marketing content for companies.<br>● Worked on visual identity, content presentation, and creative layouts.</p>
               <div class="experience-tech">
                 <span class="tech-tag">Photoshop</span><span class="tech-tag">Graphic Design</span><span class="tech-tag">Social Media Design</span>
               </div>
@@ -818,9 +1011,7 @@
   </div>
  
   <script>
-  // ══════════════════════════════════════════
-  //  DARK MODE
-  // ══════════════════════════════════════════
+  // ── DARK MODE ──
   const root = document.documentElement;
   const saved = localStorage.getItem('theme');
   if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -841,53 +1032,36 @@
   document.getElementById('theme-toggle-mobile').addEventListener('click', toggleTheme);
   document.getElementById('theme-toggle-desktop').addEventListener('click', toggleTheme);
  
-  // ══════════════════════════════════════════
-  //  LANGUAGE TOGGLE (EN / FR)
-  // ══════════════════════════════════════════
+  // ── LANGUAGE TOGGLE ──
   let currentLang = localStorage.getItem('lang') || 'en';
- 
   function applyLang(lang) {
     currentLang = lang;
     localStorage.setItem('lang', lang);
- 
-    // Update every element with data-en / data-fr
     document.querySelectorAll('[data-en]').forEach(el => {
       const text = el.getAttribute('data-' + lang);
-      if (text !== null) {
-        // Use innerHTML so <br> and <strong> work inside descriptions
-        el.innerHTML = text;
-      }
+      if (text !== null) el.innerHTML = text;
     });
- 
-    // Update button labels to show the OTHER language
+    // sync mobile header subtitle manually (not data-en element)
+    const mSub = document.getElementById('mobile-subtitle');
+    if (mSub) {
+      mSub.innerHTML = lang === 'fr'
+        ? 'Marketing Digital | SEO &amp; Développeur Web WordPress'
+        : 'Digital Marketing | SEO &amp; WordPress Web Developer';
+    }
     const nextLang = lang === 'en' ? 'FR' : 'EN';
-    document.querySelectorAll('.lang-toggle').forEach(btn => {
-      btn.textContent = nextLang;
-    });
- 
-    // Update html lang attribute
+    document.querySelectorAll('.lang-toggle').forEach(btn => { btn.textContent = nextLang; });
     document.documentElement.lang = lang;
   }
- 
-  function toggleLang() {
-    applyLang(currentLang === 'en' ? 'fr' : 'en');
-  }
- 
+  function toggleLang() { applyLang(currentLang === 'en' ? 'fr' : 'en'); }
   document.getElementById('lang-toggle-mobile').addEventListener('click', toggleLang);
   document.getElementById('lang-toggle-desktop').addEventListener('click', toggleLang);
- 
-  // Apply saved language on load
   applyLang(currentLang);
  
-  // ══════════════════════════════════════════
-  //  STICKY HEADER
-  // ══════════════════════════════════════════
+  // ── STICKY HEADER (desktop only) ──
   const header = document.querySelector('header');
   const controlsDesktop = document.getElementById('controls-desktop');
   if (header) {
-    let ticking = false;
-    let isSticky = false;
- 
+    let ticking = false, isSticky = false;
     function updateHeader() {
       const scrollY = window.scrollY;
       if (!isSticky && scrollY > 80) {
@@ -900,20 +1074,17 @@
         if (controlsDesktop) controlsDesktop.classList.remove('sticky');
       }
       const sidebarContainer = document.querySelector('.sidebar-container');
-      if (sidebarContainer) {
+      if (sidebarContainer && window.innerWidth >= 768) {
         sidebarContainer.style.top = isSticky ? '90px' : '20px';
       }
       ticking = false;
     }
- 
     window.addEventListener('scroll', () => {
       if (!ticking) { requestAnimationFrame(updateHeader); ticking = true; }
     }, { passive: true });
   }
  
-  // ══════════════════════════════════════════
-  //  NAV ACTIVE STATE
-  // ══════════════════════════════════════════
+  // ── NAV ACTIVE STATE ──
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-link');
   const observer = new IntersectionObserver(entries => {
@@ -927,19 +1098,15 @@
   }, { threshold: 0.3 });
   sections.forEach(s => observer.observe(s));
  
-  // ══════════════════════════════════════════
-  //  CAROUSEL (desktop)
-  // ══════════════════════════════════════════
+  // ── CAROUSEL (desktop) ──
   function initCarousel() {
     if (window.innerWidth < 768) return;
     const slides = document.querySelectorAll('.carousel-slide');
     const indicatorsContainer = document.getElementById('carousel-indicators');
     const counter = document.getElementById('carousel-counter');
     if (!slides.length || !indicatorsContainer) return;
- 
     let current = 0;
     indicatorsContainer.innerHTML = '';
- 
     slides.forEach((_, i) => {
       const btn = document.createElement('button');
       btn.className = 'carousel-indicator' + (i === 0 ? ' active' : '');
@@ -947,10 +1114,7 @@
       btn.addEventListener('click', () => goTo(i));
       indicatorsContainer.appendChild(btn);
     });
- 
-    function updateCounter() {
-      if (counter) counter.textContent = (current + 1) + ' / ' + slides.length;
-    }
+    function updateCounter() { if (counter) counter.textContent = (current + 1) + ' / ' + slides.length; }
     function goTo(idx) {
       slides[current].classList.remove('active');
       document.querySelectorAll('.carousel-indicator')[current].classList.remove('active');
@@ -960,69 +1124,43 @@
       updateCounter();
     }
     updateCounter();
- 
-    document.addEventListener('keydown', e => {
-      if (e.key === 'ArrowRight') goTo((current + 1) % slides.length);
-      if (e.key === 'ArrowLeft') goTo((current - 1 + slides.length) % slides.length);
-    });
- 
-    const track = document.getElementById('projects-track');
-    let startX = 0;
-    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-    track.addEventListener('touchend', e => {
-      const diff = startX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) goTo((current + 1) % slides.length);
-        else goTo((current - 1 + slides.length) % slides.length);
-      }
-    }, { passive: true });
   }
   initCarousel();
   window.addEventListener('resize', initCarousel);
  
-  // ══════════════════════════════════════════
-  //  3D CARD TILT
-  // ══════════════════════════════════════════
+  // ── 3D CARD TILT ──
   document.querySelectorAll('.project-card').forEach(card => {
     card.addEventListener('mousemove', e => {
       const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const cx = rect.width / 2;
-      const cy = rect.height / 2;
-      const rotY = ((x - cx) / cx) * 8;
-      const rotX = -((y - cy) / cy) * 8;
+      const x = e.clientX - rect.left, y = e.clientY - rect.top;
+      const cx = rect.width / 2, cy = rect.height / 2;
+      const rotY = ((x - cx) / cx) * 8, rotX = -((y - cy) / cy) * 8;
       card.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.02)`;
-      const img = card.querySelector('.project-image, .project-image-placeholder');
+      const img = card.querySelector('.project-image');
       const chip = card.querySelector('.project-title-chip');
       if (img) img.style.transform = `translateX(${rotY * 1.5}px) translateY(${rotX * -1.5}px) scale(1.05)`;
       if (chip) chip.style.transform = `translateZ(30px) translateX(${rotY * -2}px) translateY(${rotX * 2}px)`;
     });
     card.addEventListener('mouseleave', () => {
       card.style.transform = '';
-      const img = card.querySelector('.project-image, .project-image-placeholder');
+      const img = card.querySelector('.project-image');
       const chip = card.querySelector('.project-title-chip');
       if (img) img.style.transform = '';
       if (chip) chip.style.transform = '';
     });
   });
  
-  // ══════════════════════════════════════════
-  //  PROFILE PHOTO SHINE
-  // ══════════════════════════════════════════
-  const wrapper = document.querySelector('.profile-photo-wrapper');
+  // ── PROFILE SHINE ──
+  const profileWrapper = document.querySelector('.profile-photo-wrapper');
   const shine = document.querySelector('.shine');
   const oppShine = document.querySelector('.opposite-shine');
-  if (wrapper && shine) {
+  if (profileWrapper && shine) {
     document.addEventListener('mousemove', e => {
-      const rect = wrapper.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const dx = e.clientX - cx;
-      const dy = e.clientY - cy;
+      const rect = profileWrapper.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
+      const dx = e.clientX - cx, dy = e.clientY - cy;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      const maxDist = 400;
-      const opacity = Math.max(0, 1 - dist / maxDist) * 0.6;
+      const opacity = Math.max(0, 1 - dist / 400) * 0.6;
       const pctX = ((e.clientX - rect.left) / rect.width) * 100;
       const pctY = ((e.clientY - rect.top) / rect.height) * 100;
       shine.style.background = `radial-gradient(circle at ${pctX}% ${pctY}%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.2) 30%, transparent 60%)`;
@@ -1034,79 +1172,33 @@
     });
   }
  
-  // ══════════════════════════════════════════
-  //  MEMOJI MOUSE TRACKING
-  //  The memoji image shifts its background-position
-  //  based on where the cursor is on the page,
-  //  giving the illusion the character follows the mouse.
-  // ══════════════════════════════════════════
+  // ── MEMOJI TRACKING ──
   (function() {
     const memojiOverlay = document.getElementById('memoji-overlay');
-    const profileWrapper = document.getElementById('profile-wrapper');
-    if (!memojiOverlay || !profileWrapper) return;
- 
-    // How many frames of your memoji spritesheet you have.
-    // If you only have one static image (same as the base),
-    // we simulate "looking" by shifting the background position.
-    // Replace './mobin mmoji.png' with your actual memoji image path.
-    const MEMOJI_IMG = './mobin\\ mmoji.png'; // same as base photo
- 
-    // Max px the image can shift in each direction (eye-tracking effect)
-    const MAX_SHIFT = 12; // pixels
- 
-    let active = false;
-    let targetX = 0, targetY = 0;
-    let currentX = 0, currentY = 0;
-    let raf = null;
- 
+    const profileWrap = document.getElementById('profile-wrapper');
+    if (!memojiOverlay || !profileWrap) return;
+    const MAX_SHIFT = 12;
+    let active = false, targetX = 0, targetY = 0, currentX = 0, currentY = 0;
     function lerp(a, b, t) { return a + (b - a) * t; }
- 
     function animate() {
       currentX = lerp(currentX, targetX, 0.08);
       currentY = lerp(currentY, targetY, 0.08);
- 
-      // base position: center 20% (matches the static photo)
-      const posX = 50 + currentX;
-      const posY = 20 + currentY;
-      memojiOverlay.style.backgroundPosition = `${posX}% ${posY}%`;
- 
-      raf = requestAnimationFrame(animate);
+      memojiOverlay.style.backgroundPosition = `${50 + currentX}% ${20 + currentY}%`;
+      requestAnimationFrame(animate);
     }
- 
     document.addEventListener('mousemove', e => {
-      const rect = profileWrapper.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
- 
-      // Normalise mouse position relative to the photo center
-      // clamp to [-1, 1]
+      const rect = profileWrap.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2, centerY = rect.top + rect.height / 2;
       const nx = Math.max(-1, Math.min(1, (e.clientX - centerX) / (window.innerWidth / 2)));
       const ny = Math.max(-1, Math.min(1, (e.clientY - centerY) / (window.innerHeight / 2)));
- 
-      targetX = nx * MAX_SHIFT;
-      targetY = ny * MAX_SHIFT;
- 
-      // Fade in the overlay based on distance from photo
-      const dist = Math.sqrt(
-        Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2)
-      );
+      targetX = nx * MAX_SHIFT; targetY = ny * MAX_SHIFT;
+      const dist = Math.sqrt(Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2));
       const maxDist = Math.min(window.innerWidth, window.innerHeight) * 0.6;
-      const fadeOpacity = Math.max(0, Math.min(1, 1 - dist / maxDist));
-      memojiOverlay.style.opacity = fadeOpacity;
- 
-      if (!active) {
-        active = true;
-        animate();
-      }
+      memojiOverlay.style.opacity = Math.max(0, Math.min(1, 1 - dist / maxDist));
+      if (!active) { active = true; animate(); }
     });
- 
-    document.addEventListener('mouseleave', () => {
-      memojiOverlay.style.opacity = 0;
-      targetX = 0;
-      targetY = 0;
-    });
+    document.addEventListener('mouseleave', () => { memojiOverlay.style.opacity = 0; targetX = 0; targetY = 0; });
   })();
   </script>
 </body>
 </html>
- 
